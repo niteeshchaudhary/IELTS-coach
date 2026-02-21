@@ -26,8 +26,8 @@ class VocabularySystem:
     - Auto-generates more words using LLM if the bank is low
     """
 
-    def __init__(self, db_path: str = str(config.DB_PATH), llm=None):
-        self._db_path = db_path
+    def __init__(self, db_path: Optional[str] = None, llm=None):
+        self._db_path = db_path if db_path else str(config.get_db_path("default"))
         self._word_bank: list[dict] = []
         self._today_words: list[dict] = []
         self._llm = llm

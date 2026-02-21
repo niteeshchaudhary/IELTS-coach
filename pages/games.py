@@ -73,6 +73,7 @@ def _render_word_matching():
             st.session_state.wm_answers = answers
             result = game.check_answers(answers)
             st.session_state.wm_submitted = True
+            st.session_state.memory.update_daily_progress(games_played=1, add_turn=False)
 
             st.markdown(f'<div class="game-score">{result.score}/{result.total}</div>', unsafe_allow_html=True)
             st.markdown(f"⏱️ Time: {result.time_seconds:.1f}s")
@@ -120,6 +121,7 @@ def _render_sentence_completion():
         if st.button("✅ Check Answers", key="sc_check"):
             result = game.check_answers(answers)
             st.session_state.sc_submitted = True
+            st.session_state.memory.update_daily_progress(games_played=1, add_turn=False)
 
             st.markdown(f'<div class="game-score">{result.score}/{result.total}</div>', unsafe_allow_html=True)
 
@@ -158,6 +160,7 @@ def _render_typing_speed():
         if st.button("✅ Submit", key="ts_submit") and typed:
             result = game.check_answer(typed)
             st.session_state.ts_submitted = True
+            st.session_state.memory.update_daily_progress(games_played=1, add_turn=False)
 
             detail = result.details[0]
             col1, col2 = st.columns(2)
@@ -206,6 +209,7 @@ def _render_error_correction():
         if st.button("✅ Check Answers", key="ec_check"):
             result = game.check_answers(corrections)
             st.session_state.ec_submitted = True
+            st.session_state.memory.update_daily_progress(games_played=1, add_turn=False)
 
             st.markdown(f'<div class="game-score">{result.score}/{result.total}</div>', unsafe_allow_html=True)
 

@@ -113,7 +113,9 @@ def render_progress_page():
 def _get_progress_data() -> list[dict]:
     """Get daily progress data from database."""
     try:
-        conn = sqlite3.connect(str(config.DB_PATH))
+        username = st.session_state.get("username", "default")
+        db_path = str(config.get_db_path(username))
+        conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
         cursor.execute(
             """SELECT date, total_speaking_time_sec, total_turns,

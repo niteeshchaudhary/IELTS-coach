@@ -22,12 +22,15 @@ def init_session_state():
     """Initialize all session state variables on first load."""
     if "initialized" not in st.session_state:
         st.session_state.initialized = True
+        
+        username = st.session_state.get("username", "default")
+        db_path_str = str(config.get_db_path(username))
 
         # Core systems
-        st.session_state.memory = ConversationMemory()
+        st.session_state.memory = ConversationMemory(db_path=db_path_str)
         st.session_state.state_machine = ConversationStateMachine()
         st.session_state.buffer_manager = BufferManager()
-        st.session_state.vocab_system = VocabularySystem()
+        st.session_state.vocab_system = VocabularySystem(db_path=db_path_str)
 
         # LLM (lazy — initialized on first use)
         st.session_state.llm = None
@@ -131,11 +134,36 @@ def main():
     </style>
     """, unsafe_allow_html=True)
 
-    # Initialize session state
+    # Login Flow
+    if "username" not in st.session_state:
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown(f"<h1 style='text-align: center;'>{config.APP_ICON} Welcome to IELTS Coach</h1>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center;'>Please login to continue and track your personal progress.</p>", unsafe_allow_html=True)
+        
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            st.markdown("### 🔐 Login")
+            with st.form("login_form"):
+                username_input = st.text_input("Username", placeholder="Enter your username")
+                submitted = st.form_submit_button("Login", use_container_width=True)
+                if submitted:
+                    if username_input.strip():
+                        st.session_state.username = username_input.strip()
+                        st.rerun()
+                    else:
+                        st.error("Please enter a valid username.")
+        return
+
+    # Initialize session state (only runs after login)
     init_session_state()
 
     # Sidebar navigation
     st.sidebar.markdown(f"# {config.APP_ICON} IELTS Coach")
+    st.sidebar.markdown(f"**👤 User:** {st.session_state.username}")
+    if st.sidebar.button("Logout", use_container_width=True):
+        for key in list(st.session_state.keys()):
+            del st.session_state[key]
+        st.rerun()
     st.sidebar.markdown("---")
 
     page = st.sidebar.radio(

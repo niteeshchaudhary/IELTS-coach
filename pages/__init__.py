@@ -39,157 +39,88 @@ def render_conversation_page():
 
     st.markdown("---")
 
-    # ── Voice input section ──
-    col1, col2 = st.columns([2, 1])
+    # ── Conversation history ──────
+    chat_container = st.container()
+    
+    with chat_container:
+        if not st.session_state.conversation_history:
+            st.info(
+                "👋 Hi! I'm your IELTS Speaking Coach. "
+                "Start speaking or type a message below to begin our conversation. "
+                "I'll help you practice your English and improve your IELTS score!"
+            )
 
-    with col1:
-        st.markdown("### 🎙️ Voice Input")
-
-        try:
-            from streamlit_webrtc import webrtc_streamer, WebRtcMode
-
-            # Check if audio models are loaded
-            if not st.session_state.get("audio_models_loaded"):
-                with st.spinner("Loading audio models (first time may take a minute)..."):
-                    try:
-                        from audio.audio_capture import AudioCapture
-                        st.session_state.audio_capture = AudioCapture()
-                        st.session_state.audio_models_loaded = True
-                    except Exception as e:
-                        st.warning(f"Audio models not available: {e}")
-                        st.info("Using text input mode instead.")
-                        st.session_state.audio_models_loaded = False
-
-            if st.session_state.get("audio_models_loaded"):
-                # WebRTC audio streamer
-                webrtc_ctx = webrtc_streamer(
-                    key="ielts-mic",
-                    mode=WebRtcMode.SENDONLY,
-                    audio_receiver_size=1024,
-                    media_stream_constraints={
-                        "audio": {
-                            "sampleRate": config.AUDIO_SAMPLE_RATE,
-                            "channelCount": 1,
-                            "echoCancellation": True,
-                            "noiseSuppression": True,
-                        },
-                        "video": False,
-                    },
-                    rtc_configuration={
-                        "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
-                    },
-                )
-
-                # Process audio frames
-                if webrtc_ctx.audio_receiver:
-                    _process_webrtc_audio(webrtc_ctx)
-
-            else:
-                _render_text_fallback()
-
-        except ImportError:
-            st.info("📝 WebRTC not available. Using text input mode.")
-            _render_text_fallback()
-
-    with col2:
-        # Today's vocabulary sidebar
-        st.markdown("### 📘 Today's Words")
-        for word_data in st.session_state.daily_words:
-            with st.expander(f"**{word_data['word']}** — Band {word_data.get('band_level', '?')}"):
-                st.write(f"**Meaning:** {word_data['meaning']}")
-                if word_data.get("examples"):
-                    st.write(f"**Example:** {word_data['examples'][0]}")
-                if word_data.get("common_mistakes"):
-                    st.warning(f"⚠️ {word_data['common_mistakes']}")
+        for turn in st.session_state.conversation_history:
+            with st.chat_message(turn["role"], avatar="🎓" if turn["role"] == "assistant" else "🗣️"):
+                st.write(turn["content"])
+                # Play audio if available
+                if turn.get("audio_bytes"):
+                    autoplay = turn.pop("autoplay", False)
+                    st.audio(turn["audio_bytes"], format="audio/wav", autoplay=autoplay)
 
     st.markdown("---")
 
-    # ── Conversation history ──
-    st.markdown("### 💬 Conversation")
-
-    if not st.session_state.conversation_history:
-        st.info(
-            "👋 Hi! I'm your IELTS Speaking Coach. "
-            "Start speaking or type a message to begin our conversation. "
-            "I'll help you practice your English and improve your IELTS score!"
-        )
-
-    for turn in st.session_state.conversation_history:
-        if turn["role"] == "user":
-            st.markdown(
-                f'<div class="user-message">🗣️ <strong>You:</strong> {turn["content"]}</div>',
-                unsafe_allow_html=True,
+    # ── Input section ────────────
+    # Voice input in an expander or columns to keep UI clean
+    with st.expander("🎙️ Voice Input Controls", expanded=st.session_state.get("audio_models_loaded", False)):
+        try:
+            from streamlit_mic_recorder import mic_recorder
+            
+            st.markdown("**Click to start and stop recording:**")
+            audio = mic_recorder(
+                start_prompt="Record Audio",
+                stop_prompt="Stop Recording",
+                just_once=True,
+                use_container_width=True,
+                format="wav"
             )
-        else:
-            st.markdown(
-                f'<div class="ai-message">🎓 <strong>Coach:</strong> {turn["content"]}</div>',
-                unsafe_allow_html=True,
-            )
-            # Play audio if available
-            if turn.get("audio_bytes"):
-                autoplay = turn.pop("autoplay", False)
-                st.audio(turn["audio_bytes"], format="audio/wav", autoplay=autoplay)
+            
+            if audio:
+                with st.spinner("🧠 Processing your speech..."):
+                    # Load audio models if needed
+                    from audio.stt import SpeechToText
+                    if "stt" not in st.session_state:
+                         st.session_state.stt = SpeechToText()
+                         
+                    # The recorder returns a dict: {'bytes': b'...', 'sample_rate': 48000}
+                    # Convert raw bytes to the expected format for STT
+                    audio_bytes = audio['bytes']
+                    import numpy as np
+                    
+                    # For whisper, it's easier to let it decode the wav bytes directly
+                    # Our STT model might need numpy arrays, let's let st.session_state.stt.transcribe handle the raw bytes or convert 
+                    
+                    # Write to temporary file for Whisper to process
+                    import tempfile
+                    import os
+                    
+                    tmp_fd, tmp_path = tempfile.mkstemp(suffix='.wav')
+                    with os.fdopen(tmp_fd, 'wb') as f:
+                        f.write(audio_bytes)
+                        
+                    try:
+                        result = st.session_state.stt.transcribe(tmp_path)
+                        user_text = result["text"].strip()
+                        if user_text:
+                            _handle_user_input(user_text)
+                    finally:
+                        try:
+                            os.remove(tmp_path)
+                        except:
+                            pass
+                        
+        except ImportError:
+            st.info("📝 Voice recorder not installed. Run `pip install streamlit-mic-recorder`")
 
-
-def _render_text_fallback():
-    """Render text input fallback when WebRTC is not available."""
-    st.markdown(
-        "*💡 Tip: For the full voice experience, run locally with a microphone.*"
-    )
-
-    user_input = st.text_input(
-        "Type your message:",
-        key="text_input",
-        placeholder="e.g., I want to practice talking about my hometown...",
-    )
-
-    if st.button("Send", key="send_btn") and user_input:
+    # Always show chat input at the bottom
+    user_input = st.chat_input("Type your message here...")
+    if user_input:
         _handle_user_input(user_input)
 
 
-def _process_webrtc_audio(webrtc_ctx):
-    """Process audio from WebRTC streamer."""
-    capture = st.session_state.get("audio_capture")
-    if not capture:
-        return
+# Removed _render_text_fallback as it's now integrated via st.chat_input
 
-    try:
-        # Get audio frames from receiver
-        audio_frames = webrtc_ctx.audio_receiver.get_frames(timeout=0.05)
-        for frame in audio_frames:
-            capture.process_audio_frame(frame)
 
-        # Check for completed turns
-        if capture.has_completed_turn():
-            audio_data = capture.get_turn_audio()
-            if audio_data is not None and len(audio_data) > 0:
-                # Transcribe
-                from audio.stt import SpeechToText
-                if "stt" not in st.session_state:
-                    st.session_state.stt = SpeechToText()
-
-                with st.spinner("🧠 Processing your speech..."):
-                    result = st.session_state.stt.transcribe(audio_data)
-                    user_text = result["text"].strip()
-
-                if user_text:
-                    _handle_user_input(user_text)
-
-        # Update status display
-        status = capture.get_status()
-        state = status.get("state", "SILENCE")
-        state_labels = {
-            "SILENCE": "Ready to start",
-            "SPEECH_STARTED": "🎙️ Listening...",
-            "SPEAKING": "🎙️ Listening...",
-            "MAYBE_DONE": "🎙️ Listening...",
-            "TURN_COMPLETE": "🧠 Thinking...",
-        }
-        st.session_state.current_status = state_labels.get(state, "Ready")
-
-    except Exception as e:
-        if "timeout" not in str(e).lower():
-            st.warning(f"Audio processing error: {e}")
 
 
 def _handle_user_input(user_text: str):
@@ -200,6 +131,11 @@ def _handle_user_input(user_text: str):
         "content": user_text,
     })
     st.session_state.memory.add_turn("user", user_text)
+
+    # Estimate speaking duration for tracking
+    estimated_duration = (len(user_text.split()) / 130.0) * 60.0
+    st.session_state.memory.update_daily_progress(speaking_time_sec=estimated_duration)
+
 
     st.session_state.current_status = "🧠 Thinking..."
 
@@ -232,11 +168,12 @@ def _handle_user_input(user_text: str):
 
             context = st.session_state.memory.get_context_with_vocab()
 
-            ai_response = llm.generate(
-                user_message=user_prompt,
-                context=context[:-1],  # Exclude the last user turn (it's in user_prompt)
-                system_prompt=prompts.SYSTEM_TUTOR,
-            )
+            with st.spinner("🧠 Thinking..."):
+                ai_response = llm.generate(
+                    user_message=user_prompt,
+                    context=context[:-1],  # Exclude the last user turn (it's in user_prompt)
+                    system_prompt=prompts.SYSTEM_TUTOR + "\nIMPORTANT: You are ONLY the Tutor. Do not write the student's part. Respond with only your next sentence(s) in the conversation.",
+                )
 
             # Add AI response to conversation
             st.session_state.conversation_history.append({

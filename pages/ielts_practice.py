@@ -55,7 +55,7 @@ def _render_speaking_practice():
 
             for i, question in enumerate(part1_questions):
                 st.markdown(f"**Q{i+1}:** {question}")
-                answer = st.text_area(
+                answer = _render_voice_and_text_input(
                     f"Your answer to Q{i+1}:",
                     key=f"sp1_a{i}",
                     height=80,
@@ -103,7 +103,7 @@ def _render_speaking_practice():
         )
 
         st.markdown("**Your response (1–2 minutes):**")
-        response = st.text_area(
+        response = _render_voice_and_text_input(
             "Speak about the topic:",
             key="sp2_response",
             height=200,
@@ -127,7 +127,7 @@ def _render_speaking_practice():
 
         for i, question in enumerate(part3_questions):
             st.markdown(f"**Q{i+1}:** {question}")
-            answer = st.text_area(
+            answer = _render_voice_and_text_input(
                 f"Your answer to Q{i+1}:",
                 key=f"sp3_a{i}",
                 height=100,
@@ -298,17 +298,79 @@ def _get_part3_questions(theme: str) -> list[str]:
     return default_questions
 
 
+def _render_voice_and_text_input(label: str, key: str, height: int = 80, placeholder: str = "") -> str:
+    """Helper to render a voice recorder and a text area that syncs."""
+    st.markdown(label)
+    try:
+        from streamlit_mic_recorder import mic_recorder
+        
+        audio = mic_recorder(
+            start_prompt="🎙️ Click to Speak",
+            stop_prompt="🛑 Stop Recording",
+            just_once=True,
+            use_container_width=False,
+            format="wav",
+            key=f"{key}_mic"
+        )
+        
+        if audio and st.session_state.get(f"{key}_last_audio_id") != audio.get("id"):
+            st.session_state[f"{key}_last_audio_id"] = audio.get("id")
+            with st.spinner("🧠 Transcribing..."):
+                from audio.stt import SpeechToText
+                if "stt" not in st.session_state:
+                     st.session_state.stt = SpeechToText()
+                
+                import tempfile
+                import os
+                tmp_fd, tmp_path = tempfile.mkstemp(suffix='.wav')
+                with os.fdopen(tmp_fd, 'wb') as f:
+                    f.write(audio['bytes'])
+                    
+                try:
+                    result = st.session_state.stt.transcribe(tmp_path)
+                    new_text = result["text"].strip()
+                    if new_text:
+                        current_text = st.session_state.get(key, "")
+                        st.session_state[key] = current_text + (" " if current_text else "") + new_text
+                        st.rerun()
+                except Exception as e:
+                    st.error(f"Transcription failed: {e}")
+                finally:
+                    try:
+                        os.remove(tmp_path)
+                    except:
+                        pass
+    except ImportError:
+        pass
+
+    return st.text_area(
+        label="Text input",
+        key=key,
+        height=height,
+        placeholder=placeholder,
+        label_visibility="collapsed"
+    )
+
+
 def _show_score(text: str, topic: str = "", duration: float = 0):
     """Display IELTS band score evaluation."""
     st.markdown("---")
     st.markdown("### 📊 Band Score Estimate")
 
+    from app import get_llm_instance
+    get_llm_instance()
+
     scorer = st.session_state.get("ielts_scorer")
     if scorer:
+        if duration <= 0:
+            word_count = len(text.split())
+            duration = (word_count / 130.0) * 60.0  # estimate ~130 words per min
+            
         with st.spinner("Evaluating your response..."):
             result = scorer.evaluate(text, duration, topic)
 
         if result and result.get("overall_band", 0) > 0:
+            st.session_state.memory.update_daily_progress(speaking_time_sec=duration, band_score=result["overall_band"], add_turn=False)
             st.markdown(f"## Overall Band: **{result['overall_band']:.1f}**")
 
             col1, col2, col3, col4 = st.columns(4)

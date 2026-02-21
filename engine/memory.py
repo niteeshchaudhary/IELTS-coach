@@ -38,12 +38,12 @@ class ConversationMemory:
     def __init__(
         self,
         max_turns: int = config.CONVERSATION_HISTORY_MAX_TURNS,
-        db_path: str = str(config.DB_PATH),
+        db_path: Optional[str] = None,
     ):
         self._max_turns = max_turns
         self._turns: list[Turn] = []
         self._session_id = f"session_{int(time.time())}"
-        self._db_path = db_path
+        self._db_path = db_path if db_path else str(config.get_db_path("default"))
         self._vocab_words: list[str] = []  # Today's vocabulary words
 
         # Initialize database
@@ -247,20 +247,23 @@ class ConversationMemory:
         except Exception as e:
             print(f"Warning: Failed to save session: {e}")
 
-    def update_daily_progress(self, speaking_time_sec: float = 0, band_score: float = None):
+    def update_daily_progress(self, speaking_time_sec: float = 0, band_score: float = None, games_played: int = 0, add_turn: bool = True):
         """Update daily progress tracking."""
         try:
             today = date.today().isoformat()
             conn = sqlite3.connect(self._db_path)
             cursor = conn.cursor()
 
+            turns_inc = 1 if add_turn else 0
+
             cursor.execute(
-                """INSERT INTO daily_progress (date, total_speaking_time_sec, total_turns)
-                   VALUES (?, ?, ?)
+                """INSERT INTO daily_progress (date, total_speaking_time_sec, total_turns, games_played)
+                   VALUES (?, ?, ?, ?)
                    ON CONFLICT(date) DO UPDATE SET
                        total_speaking_time_sec = total_speaking_time_sec + ?,
-                       total_turns = total_turns + 1""",
-                (today, speaking_time_sec, 1, speaking_time_sec),
+                       total_turns = total_turns + ?,
+                       games_played = games_played + ?""",
+                (today, speaking_time_sec, turns_inc, games_played, speaking_time_sec, turns_inc, games_played),
             )
 
             if band_score is not None:

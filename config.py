@@ -11,9 +11,16 @@ from pathlib import Path
 # ──────────────────────────────────────────────
 BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
-DB_PATH = DATA_DIR / "user_progress.db"
 VOCAB_JSON_PATH = DATA_DIR / "ielts_vocabulary.json"
 TOPICS_JSON_PATH = DATA_DIR / "ielts_topics.json"
+
+def get_db_path(username: str) -> Path:
+    """Get the database path for a specific user."""
+    # Sanitize username for filename safety
+    safe_username = "".join([c for c in username if c.isalnum() or c in ('-', '_')]).strip()
+    if not safe_username:
+        safe_username = "default"
+    return DATA_DIR / f"{safe_username}_progress.db"
 
 # ──────────────────────────────────────────────
 # Audio Pipeline

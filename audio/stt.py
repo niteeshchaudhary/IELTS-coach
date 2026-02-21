@@ -42,7 +42,7 @@ class SpeechToText:
 
     def transcribe(
         self,
-        audio_data: np.ndarray,
+        audio_data: np.ndarray | str,
         sample_rate: int = config.AUDIO_SAMPLE_RATE,
     ) -> dict:
         """
@@ -60,13 +60,16 @@ class SpeechToText:
                 - segments (list): Individual segment details
         """
         with self._lock:
-            # Convert to float32 normalized to [-1, 1] if needed
-            if audio_data.dtype == np.int16:
-                audio_float = audio_data.astype(np.float32) / 32768.0
-            elif audio_data.dtype == np.float32:
+            if isinstance(audio_data, str):
                 audio_float = audio_data
             else:
-                audio_float = audio_data.astype(np.float32)
+                # Convert to float32 normalized to [-1, 1] if needed
+                if audio_data.dtype == np.int16:
+                    audio_float = audio_data.astype(np.float32) / 32768.0
+                elif audio_data.dtype == np.float32:
+                    audio_float = audio_data
+                else:
+                    audio_float = audio_data.astype(np.float32)
 
             # Transcribe with VAD filter
             segments, info = self._model.transcribe(
