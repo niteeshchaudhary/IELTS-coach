@@ -117,9 +117,16 @@ class AudioCapture:
             return frame
 
         # Convert av.AudioFrame to numpy array
-        audio_array = frame.to_ndarray().flatten()
+        # to_ndarray() returns shape (channels, samples)
+        audio_array = frame.to_ndarray()
+        
+        # Force mono by averaging channels if stereo
+        if audio_array.ndim > 1 and audio_array.shape[0] > 1:
+            audio_array = np.mean(audio_array, axis=0)
+        else:
+            audio_array = audio_array.flatten()
 
-        # Resample to 16kHz mono if needed
+        # Resample to 16kHz if needed
         if frame.sample_rate != config.AUDIO_SAMPLE_RATE:
             audio_array = self._resample(
                 audio_array, frame.sample_rate, config.AUDIO_SAMPLE_RATE

@@ -39,15 +39,45 @@ class ConversationMemory:
         self,
         max_turns: int = config.CONVERSATION_HISTORY_MAX_TURNS,
         db_path: Optional[str] = None,
+        session_id: Optional[str] = None,
     ):
         self._max_turns = max_turns
         self._turns: list[Turn] = []
-        self._session_id = f"session_{int(time.time())}"
+        self._session_id = session_id if session_id else f"session_{int(time.time())}"
         self._db_path = db_path if db_path else str(config.get_db_path("default"))
         self._vocab_words: list[str] = []  # Today's vocabulary words
 
         # Initialize database
         self._init_db()
+        
+        # Load existing session if provided
+        if session_id:
+            self._load_session()
+
+    def _load_session(self):
+        """Load conversation history for the current session from database."""
+        try:
+            conn = sqlite3.connect(self._db_path)
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT role, content, timestamp, metadata FROM conversation_history WHERE session_id = ? ORDER BY timestamp ASC",
+                (self._session_id,)
+            )
+            rows = cursor.fetchall()
+            for row in rows:
+                turn = Turn(
+                    role=row[0],
+                    content=row[1],
+                    timestamp=row[2],
+                    metadata=json.loads(row[3]) if row[3] else {}
+                )
+                self._turns.append(turn)
+            conn.close()
+            # Trim to max turns
+            if len(self._turns) > self._max_turns:
+                 self._turns = self._turns[-self._max_turns:]
+        except Exception as e:
+            print(f"Warning: Failed to load session: {e}")
 
     def _init_db(self):
         """Initialize SQLite database for persistence."""

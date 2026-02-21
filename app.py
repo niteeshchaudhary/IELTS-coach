@@ -26,8 +26,18 @@ def init_session_state():
         username = st.session_state.get("username", "default")
         db_path_str = str(config.get_db_path(username))
 
+        # Session ID handling
+        import time
+        if "session_id" in st.query_params:
+            session_id = st.query_params["session_id"]
+        else:
+            session_id = f"session_{int(time.time())}"
+            st.query_params["session_id"] = session_id
+
+        st.session_state.session_id = session_id
+
         # Core systems
-        st.session_state.memory = ConversationMemory(db_path=db_path_str)
+        st.session_state.memory = ConversationMemory(db_path=db_path_str, session_id=session_id)
         st.session_state.state_machine = ConversationStateMachine()
         st.session_state.buffer_manager = BufferManager()
         st.session_state.vocab_system = VocabularySystem(db_path=db_path_str)
@@ -44,7 +54,10 @@ def init_session_state():
         )
 
         # Conversation UI state
-        st.session_state.conversation_history = []
+        st.session_state.conversation_history = [
+            {"role": t.role, "content": t.content}
+            for t in st.session_state.memory._turns
+        ]
         st.session_state.current_status = "Ready to start"
 
         # Audio state
@@ -134,6 +147,10 @@ def main():
     </style>
     """, unsafe_allow_html=True)
 
+    # Try to load username from query params
+    if "username" not in st.session_state and "username" in st.query_params:
+        st.session_state.username = st.query_params["username"]
+
     # Login Flow
     if "username" not in st.session_state:
         st.markdown("<br><br>", unsafe_allow_html=True)
@@ -149,6 +166,7 @@ def main():
                 if submitted:
                     if username_input.strip():
                         st.session_state.username = username_input.strip()
+                        st.query_params["username"] = username_input.strip()
                         st.rerun()
                     else:
                         st.error("Please enter a valid username.")
@@ -163,21 +181,35 @@ def main():
     if st.sidebar.button("Logout", use_container_width=True):
         for key in list(st.session_state.keys()):
             del st.session_state[key]
+        st.query_params.clear()
         st.rerun()
     st.sidebar.markdown("---")
 
+    page_options = [
+        "🎙️ Conversation",
+        "🤝 Interview",
+        "📘 Word of the Day",
+        "🎮 Games",
+        "🧪 IELTS Practice",
+        "📊 Progress",
+        "📖 IELTS Guide",
+    ]
+    
+    default_page_index = 0
+    if "page" in st.query_params:
+        try:
+            default_page_index = page_options.index(st.query_params["page"])
+        except ValueError:
+            pass
+
     page = st.sidebar.radio(
         "Navigate",
-        options=[
-            "🎙️ Conversation",
-            "📘 Word of the Day",
-            "🎮 Games",
-            "🧪 IELTS Practice",
-            "📊 Progress",
-            "📖 IELTS Guide",
-        ],
-        index=0,
+        options=page_options,
+        index=default_page_index,
     )
+
+    if st.query_params.get("page") != page:
+        st.query_params["page"] = page
 
     # Daily vocab in sidebar with pronunciation
     st.sidebar.markdown("---")
@@ -210,6 +242,9 @@ def main():
     if page == "🎙️ Conversation":
         from pages.conversation import render_conversation_page
         render_conversation_page()
+    elif page == "🤝 Interview":
+        from pages.interview import render_interview_page
+        render_interview_page()
     elif page == "📘 Word of the Day":
         from pages.vocabulary import render_vocabulary_page
         render_vocabulary_page()
