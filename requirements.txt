@@ -1,0 +1,33 @@
+# Streamlit
+streamlit>=1.39.0
+streamlit-webrtc>=0.47.0
+
+# Audio Processing
+PyAudio>=0.2.14
+sounddevice>=0.4.6
+numpy>=1.24.0
+scipy>=1.11.0
+av>=10.0.0
+
+# Speech-to-Text
+faster-whisper>=1.0.0
+
+# Voice Activity Detection
+silero-vad>=5.1
+torch>=2.0.0
+torchaudio>=2.0.0
+
+# Text-to-Speech
+piper-tts>=1.2.0
+
+# LLM Providers
+openai>=1.12.0
+google-generativeai>=0.5.0
+groq>=0.4.0
+
+# Data & Persistence
+# sqlite3 is built-in
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0

@@ -1,0 +1,1394 @@
+[
+  {
+    "word": "ubiquitous",
+    "band_level": 7,
+    "topic": "technology",
+    "meaning": "present, appearing, or found everywhere",
+    "examples": [
+      "Smartphones have become ubiquitous in modern society.",
+      "The ubiquitous influence of social media affects all age groups."
+    ],
+    "usage_notes": "Often used in IELTS essays about technology and society",
+    "common_mistakes": "Don't confuse with 'unique'. Ubiquitous means everywhere, not one-of-a-kind."
+  },
+  {
+    "word": "prevalent",
+    "band_level": 7,
+    "topic": "health",
+    "meaning": "widespread in a particular area or at a particular time",
+    "examples": [
+      "Obesity is increasingly prevalent among young people.",
+      "This disease is most prevalent in tropical regions."
+    ],
+    "usage_notes": "Good for discussing health, social issues, or trends",
+    "common_mistakes": "Prevalent means widespread, not 'important'. It describes frequency, not significance."
+  },
+  {
+    "word": "advocate",
+    "band_level": 6,
+    "topic": "society",
+    "meaning": "to publicly support or recommend (verb); a person who supports (noun)",
+    "examples": [
+      "Many experts advocate for stricter environmental regulations.",
+      "She is a strong advocate of children's rights."
+    ],
+    "usage_notes": "Can be used as verb ('advocate for') or noun ('an advocate of/for')",
+    "common_mistakes": "As a verb, say 'advocate FOR something', not 'advocate something' in most cases."
+  },
+  {
+    "word": "mitigate",
+    "band_level": 7,
+    "topic": "environment",
+    "meaning": "to make something less severe, serious, or painful",
+    "examples": [
+      "Governments must take action to mitigate the effects of climate change.",
+      "The new policy aims to mitigate unemployment in rural areas."
+    ],
+    "usage_notes": "High-band word perfect for discussing solutions to problems",
+    "common_mistakes": "Mitigate means reduce severity, not eliminate entirely. Don't confuse with 'militate'."
+  },
+  {
+    "word": "exacerbate",
+    "band_level": 8,
+    "topic": "society",
+    "meaning": "to make a problem, bad situation, or negative feeling worse",
+    "examples": [
+      "The drought has exacerbated food shortages in the region.",
+      "Social media can exacerbate feelings of loneliness among teenagers."
+    ],
+    "usage_notes": "The opposite of 'mitigate'. Great for discussing problems getting worse",
+    "common_mistakes": "Pronounce: ig-ZAS-er-bate. Don't say 'exasperate' (which means to annoy)."
+  },
+  {
+    "word": "paradigm",
+    "band_level": 8,
+    "topic": "education",
+    "meaning": "a typical example or pattern of something; a model",
+    "examples": [
+      "The internet has created a new paradigm for how we access information.",
+      "We need a paradigm shift in education to prepare students for the future."
+    ],
+    "usage_notes": "'Paradigm shift' is a powerful IELTS phrase for discussing major changes",
+    "common_mistakes": "Pronounce: PAR-a-dime, not PAR-a-dig-em."
+  },
+  {
+    "word": "facilitate",
+    "band_level": 7,
+    "topic": "education",
+    "meaning": "to make an action or process easy or easier",
+    "examples": [
+      "Technology has facilitated communication across borders.",
+      "The teacher's role is to facilitate learning, not just lecture."
+    ],
+    "usage_notes": "Great alternative to 'make easier' or 'help'",
+    "common_mistakes": "Facilitate takes a direct object: 'facilitate learning' not 'facilitate to learn'."
+  },
+  {
+    "word": "detrimental",
+    "band_level": 7,
+    "topic": "health",
+    "meaning": "tending to cause harm; damaging",
+    "examples": [
+      "Excessive screen time can be detrimental to children's development.",
+      "The policy change had a detrimental effect on small businesses."
+    ],
+    "usage_notes": "Use 'detrimental to' \u2014 stronger than 'bad for'",
+    "common_mistakes": "It's 'detrimental TO something', not 'detrimental FOR something'."
+  },
+  {
+    "word": "unprecedented",
+    "band_level": 7,
+    "topic": "society",
+    "meaning": "never done or known before",
+    "examples": [
+      "The pandemic caused unprecedented disruption to global economies.",
+      "We are living in an era of unprecedented technological change."
+    ],
+    "usage_notes": "Powerful word for emphasizing how new/extreme something is",
+    "common_mistakes": "Don't overuse. Reserve for truly unique situations."
+  },
+  {
+    "word": "resilient",
+    "band_level": 7,
+    "topic": "society",
+    "meaning": "able to recover quickly from difficult conditions",
+    "examples": [
+      "Children are often more resilient than adults give them credit for.",
+      "Building resilient communities is essential for disaster preparedness."
+    ],
+    "usage_notes": "Can describe people, systems, economies, or communities",
+    "common_mistakes": "Resilient means bouncing back, not just 'strong'. A brick wall is strong but not resilient."
+  },
+  {
+    "word": "substantial",
+    "band_level": 6,
+    "topic": "general",
+    "meaning": "of considerable importance, size, or worth",
+    "examples": [
+      "There has been a substantial increase in online shopping.",
+      "The government allocated substantial funds to healthcare."
+    ],
+    "usage_notes": "Better than 'big' or 'a lot of' in academic contexts",
+    "common_mistakes": "Substantial implies significance, not just physical size."
+  },
+  {
+    "word": "incentive",
+    "band_level": 6,
+    "topic": "economics",
+    "meaning": "a thing that motivates or encourages someone to do something",
+    "examples": [
+      "Tax breaks provide an incentive for businesses to invest in green energy.",
+      "There is little incentive for students to study if jobs are scarce."
+    ],
+    "usage_notes": "Very useful for discussing policies, economics, and motivation",
+    "common_mistakes": "Incentive is usually external motivation. Don't confuse with 'motive' (internal reason)."
+  },
+  {
+    "word": "deteriorate",
+    "band_level": 7,
+    "topic": "health",
+    "meaning": "to become progressively worse",
+    "examples": [
+      "Air quality continues to deteriorate in major cities.",
+      "His health deteriorated rapidly after the diagnosis."
+    ],
+    "usage_notes": "A powerful verb for describing decline. Much better than 'get worse'",
+    "common_mistakes": "Deteriorate is intransitive \u2014 things deteriorate on their own. Don't say 'deteriorate something'."
+  },
+  {
+    "word": "scrutinize",
+    "band_level": 8,
+    "topic": "society",
+    "meaning": "to examine or inspect closely and thoroughly",
+    "examples": [
+      "The government's policies should be scrutinized by the media.",
+      "Consumers increasingly scrutinize the ingredients in their food."
+    ],
+    "usage_notes": "Implies careful, critical examination \u2014 more formal than 'look at closely'",
+    "common_mistakes": "Scrutinize is transitive \u2014 'scrutinize something', not 'scrutinize at something'."
+  },
+  {
+    "word": "disparity",
+    "band_level": 8,
+    "topic": "economics",
+    "meaning": "a great difference; inequality",
+    "examples": [
+      "There is a growing disparity between rich and poor countries.",
+      "Gender disparity in education remains a significant issue."
+    ],
+    "usage_notes": "Stronger and more academic than 'difference' or 'gap'. Use for describing inequality",
+    "common_mistakes": "Disparity implies unfairness or an imbalance, not just any difference."
+  },
+  {
+    "word": "pragmatic",
+    "band_level": 8,
+    "topic": "general",
+    "meaning": "dealing with things sensibly and realistically, in a practical way",
+    "examples": [
+      "The government needs to take a more pragmatic approach to healthcare.",
+      "She's very pragmatic \u2014 she focuses on solutions, not ideals."
+    ],
+    "usage_notes": "Shows sophisticated thinking by balancing ideals with practical reality",
+    "common_mistakes": "Pragmatic doesn't mean 'lacking ideals'. It means choosing practical solutions."
+  },
+  {
+    "word": "allocate",
+    "band_level": 6,
+    "topic": "economics",
+    "meaning": "to distribute resources or duties for a particular purpose",
+    "examples": [
+      "The government should allocate more funds to education.",
+      "Students need to learn how to allocate their time effectively."
+    ],
+    "usage_notes": "More formal alternative to 'give' or 'assign'. Common in discussions about resources",
+    "common_mistakes": "Allocate TO a purpose or person, not allocate FOR."
+  },
+  {
+    "word": "sustainable",
+    "band_level": 6,
+    "topic": "environment",
+    "meaning": "able to be maintained at a certain rate or level; environmentally friendly",
+    "examples": [
+      "We need to develop sustainable sources of energy.",
+      "Economic growth must be sustainable to benefit future generations."
+    ],
+    "usage_notes": "Essential IELTS word for environment topics. Also used for economics and development",
+    "common_mistakes": "Sustainable doesn't just mean 'green'. It means something that can continue long-term."
+  },
+  {
+    "word": "innovative",
+    "band_level": 6,
+    "topic": "technology",
+    "meaning": "introducing new ideas, methods, or products; creative",
+    "examples": [
+      "The company is known for its innovative approach to problem-solving.",
+      "Innovative technologies are transforming the education sector."
+    ],
+    "usage_notes": "Very versatile word \u2014 applicable to technology, education, business, and society topics",
+    "common_mistakes": "Innovation is the noun, innovative is the adjective, innovate is the verb. Don't mix them up."
+  },
+  {
+    "word": "autonomous",
+    "band_level": 8,
+    "topic": "technology",
+    "meaning": "having the freedom to act independently; self-governing",
+    "examples": [
+      "Autonomous vehicles will revolutionize transportation.",
+      "Students should develop autonomous learning skills."
+    ],
+    "usage_notes": "Used for self-driving technology, independent learning, and political self-governance",
+    "common_mistakes": "Autonomous means fully independent. Semi-autonomous means partially independent."
+  },
+  {
+    "word": "interface",
+    "band_level": 7,
+    "topic": "technology",
+    "meaning": "a point where two systems, devices, or people meet and interact",
+    "examples": [
+      "The new smartphone has a very user-friendly interface.",
+      "The company is developing an interface between their software and the client's database."
+    ],
+    "usage_notes": "Useful for discussing human-computer interaction or compatibility between systems.",
+    "common_mistakes": "Don't confuse with 'interfere'."
+  },
+  {
+    "word": "prototype",
+    "band_level": 7,
+    "topic": "technology",
+    "meaning": "an early version of a product or system used for testing",
+    "examples": [
+      "The company has developed a prototype of their new electric car.",
+      "The prototype of the new smartphone was unveiled at the tech conference."
+    ],
+    "usage_notes": "Good for discussing innovation, design, or product development.",
+    "common_mistakes": "Don't confuse with 'pattern'."
+  },
+  {
+    "word": "algorithm",
+    "band_level": 7,
+    "topic": "technology",
+    "meaning": "a set of instructions used to solve a problem or complete a task",
+    "examples": [
+      "The search engine uses a complex algorithm to rank websites.",
+      "The algorithm used in the self-driving car is highly advanced."
+    ],
+    "usage_notes": "Useful for discussing artificial intelligence, data analysis, or computer science.",
+    "common_mistakes": "Don't pronounce it as 'al-gor-ithm', the correct pronunciation is 'al-go-rith-um'."
+  },
+  {
+    "word": "cybernetic",
+    "band_level": 7,
+    "topic": "technology",
+    "meaning": "related to the study of control and communication in machines and living beings",
+    "examples": [
+      "The cybernetic system in the factory automates many processes.",
+      "The scientist is studying cybernetic systems to improve human-machine interaction."
+    ],
+    "usage_notes": "Good for discussing robotics, artificial intelligence, or automation.",
+    "common_mistakes": "Don't confuse with 'cyber'."
+  },
+  {
+    "word": "ecosystem",
+    "band_level": 7,
+    "topic": "environment",
+    "meaning": "a community of living and non-living things that interact with each other",
+    "examples": [
+      "Human activities are disrupting the delicate ecosystem of the coral reef.",
+      "The forest ecosystem provides habitat for a wide variety of plant and animal species."
+    ],
+    "usage_notes": "Use to describe the interconnectedness of living and non-living components in the environment.",
+    "common_mistakes": "Don't confuse with 'environment', which is a broader term."
+  },
+  {
+    "word": "sustainability",
+    "band_level": 7,
+    "topic": "environment",
+    "meaning": "the ability to maintain or support a process without depleting natural resources",
+    "examples": [
+      "The company is committed to sustainability and has implemented environmentally-friendly practices.",
+      "The long-term sustainability of the project is uncertain due to funding issues."
+    ],
+    "usage_notes": "Good for discussing the feasibility of environmental projects or practices.",
+    "common_mistakes": "Don't use 'sustainable' as a synonym for 'environmentally friendly'."
+  },
+  {
+    "word": "conservation",
+    "band_level": 7,
+    "topic": "environment",
+    "meaning": "the act of preserving or protecting something, especially the natural environment",
+    "examples": [
+      "The conservation efforts of the national park have helped to increase the population of endangered species.",
+      "The organization is dedicated to conservation and has launched several initiatives to protect wildlife habitats."
+    ],
+    "usage_notes": "Use to describe the act of protecting or preserving the environment.",
+    "common_mistakes": "Don't confuse with 'preservation', which refers to maintaining something in its original state."
+  },
+  {
+    "word": "pollutant",
+    "band_level": 7,
+    "topic": "environment",
+    "meaning": "a substance that contaminates the environment",
+    "examples": [
+      "The factory is releasing a pollutant into the air that is harmful to human health.",
+      "The government has implemented regulations to reduce the amount of pollutants in the water supply."
+    ],
+    "usage_notes": "Good for discussing the negative impact of human activities on the environment.",
+    "common_mistakes": "Don't use 'pollution' as a synonym for 'pollutant'."
+  },
+  {
+    "word": "biodiversity",
+    "band_level": 7,
+    "topic": "environment",
+    "meaning": "the variety of different plants, animals, and microorganisms that live in an ecosystem",
+    "examples": [
+      "The rainforest is home to a vast array of biodiversity, including many endangered species.",
+      "The loss of biodiversity is a major concern due to the impact of human activities on ecosystems."
+    ],
+    "usage_notes": "Use to describe the variety of species in an ecosystem.",
+    "common_mistakes": "Don't confuse with 'ecosystem', which refers to the interactions between living and non-living components."
+  },
+  {
+    "word": "pedagogy",
+    "band_level": 7,
+    "topic": "education",
+    "meaning": "the method and practice of teaching",
+    "examples": [
+      "The university's education department focuses on developing innovative pedagogy for the 21st century.",
+      "The teacher's pedagogy was centered around student-led discussions and projects."
+    ],
+    "usage_notes": "Use to discuss teaching methods and educational approaches.",
+    "common_mistakes": "Don't confuse with 'pediatric', which refers to the medical care of children."
+  },
+  {
+    "word": "assimilate",
+    "band_level": 7,
+    "topic": "education",
+    "meaning": "to learn and absorb new ideas or information",
+    "examples": [
+      "It takes time for new students to assimilate the classroom rules and routines.",
+      "The researcher aimed to assimilate the data from various studies to draw a comprehensive conclusion."
+    ],
+    "usage_notes": "Good for discussing the process of learning and understanding new concepts.",
+    "common_mistakes": "Don't confuse with 'accommodate', which means to provide something that is needed or wanted."
+  },
+  {
+    "word": "heterogeneous",
+    "band_level": 7,
+    "topic": "education",
+    "meaning": "diverse or composed of different kinds of things",
+    "examples": [
+      "The school's student body is heterogeneous, with students from various cultural backgrounds.",
+      "The researcher studied a heterogeneous sample of participants to ensure the results were representative."
+    ],
+    "usage_notes": "Use to describe a diverse or mixed group of people, things, or ideas.",
+    "common_mistakes": "Don't confuse with 'homogeneous', which means uniform or identical."
+  },
+  {
+    "word": "interdisciplinary",
+    "band_level": 7,
+    "topic": "education",
+    "meaning": "involving two or more subjects or fields of study",
+    "examples": [
+      "The university's interdisciplinary program combines courses from business, engineering, and environmental science.",
+      "The researcher's interdisciplinary approach led to a more comprehensive understanding of the complex issue."
+    ],
+    "usage_notes": "Good for discussing the connection between different subjects or fields of study.",
+    "common_mistakes": "Don't confuse with 'multidisciplinary', which refers to multiple disciplines working together but remaining separate."
+  },
+  {
+    "word": "catalyst",
+    "band_level": 7,
+    "topic": "education",
+    "meaning": "a person, event, or thing that causes a change or development",
+    "examples": [
+      "The new education policy acted as a catalyst for reform in the school system.",
+      "The teacher's enthusiasm was a catalyst for the students' interest in the subject."
+    ],
+    "usage_notes": "Use to describe something that triggers a change or sparks a development.",
+    "common_mistakes": "Don't confuse with 'initiator', which refers to the person who starts something, but may not necessarily cause a change."
+  },
+  {
+    "word": "nuanced",
+    "band_level": 7,
+    "topic": "health",
+    "meaning": "having many subtle differences or aspects",
+    "examples": [
+      "The relationship between diet and health is nuanced and influenced by many factors.",
+      "The doctor's diagnosis was nuanced, taking into account the patient's medical history and lifestyle."
+    ],
+    "usage_notes": "Good for adding complexity to your discussions of health issues.",
+    "common_mistakes": "Don't use it to mean 'complicated' - nuanced implies subtlety, not just difficulty."
+  },
+  {
+    "word": "debilitate",
+    "band_level": 7,
+    "topic": "health",
+    "meaning": "to make someone or something weak or less effective",
+    "examples": [
+      "Chronic illness can debilitate a person, making everyday tasks challenging.",
+      "The new medication is designed to prevent the disease from debilitate its victims."
+    ],
+    "usage_notes": "Useful for describing the impact of illness or disease on individuals.",
+    "common_mistakes": "Don't confuse with 'disable', which means to make someone or something unable to function."
+  },
+  {
+    "word": "epidemic",
+    "band_level": 7,
+    "topic": "health",
+    "meaning": "a sudden, widespread occurrence of a particular disease",
+    "examples": [
+      "The flu epidemic swept through the city, infecting thousands of people.",
+      "The WHO declared the outbreak an epidemic and mobilized resources to combat it."
+    ],
+    "usage_notes": "Good for describing sudden, large-scale health crises.",
+    "common_mistakes": "Don't use it to describe a long-term, ongoing health issue - use 'endemic' instead."
+  },
+  {
+    "word": "remedy",
+    "band_level": 7,
+    "topic": "health",
+    "meaning": "a treatment or solution for a problem or illness",
+    "examples": [
+      "The new medication is a potential remedy for the disease.",
+      "Lifestyle changes can be a simple yet effective remedy for many common health issues."
+    ],
+    "usage_notes": "Useful for discussing solutions to health problems.",
+    "common_mistakes": "Don't confuse with 'cure', which implies a complete and permanent solution."
+  },
+  {
+    "word": "marginalized",
+    "band_level": 7,
+    "topic": "society",
+    "meaning": "treated as if you are not important or are outside the main group",
+    "examples": [
+      "The marginalized community has been fighting for its rights for years.",
+      "The government's policies have marginalized certain groups, leading to social unrest."
+    ],
+    "usage_notes": "Use to discuss social issues, such as inequality or discrimination, in IELTS Writing.",
+    "common_mistakes": "Don't use as a synonym for 'poor' or 'unhappy'; it specifically refers to being excluded or ignored."
+  },
+  {
+    "word": "stereotype",
+    "band_level": 7,
+    "topic": "society",
+    "meaning": "a fixed, oversimplified image or idea of a person, group, or thing",
+    "examples": [
+      "The media often perpetuate stereotypes about certain professions or cultures.",
+      "We should avoid making assumptions based on stereotypes and get to know people as individuals."
+    ],
+    "usage_notes": "Use to discuss social issues, such as prejudice or bias, in IELTS Speaking or Writing.",
+    "common_mistakes": "Don't confuse with 'clich\u00e9', which refers to an overused expression or idea."
+  },
+  {
+    "word": "cohesion",
+    "band_level": 7,
+    "topic": "society",
+    "meaning": "the state of being united or sticking together",
+    "examples": [
+      "The community's social cohesion is essential for its well-being and development.",
+      "The government's policies aim to promote social cohesion by encouraging integration and inclusivity."
+    ],
+    "usage_notes": "Use to discuss social issues, such as community building or social bonds, in IELTS Writing.",
+    "common_mistakes": "Don't confuse with 'coincidence', which refers to an unexpected event or occurrence."
+  },
+  {
+    "word": "socialization",
+    "band_level": 7,
+    "topic": "society",
+    "meaning": "the process of learning to behave in a way that is acceptable to society",
+    "examples": [
+      "Children learn socialization skills, such as sharing and cooperation, through play.",
+      "The socialization of young people is crucial for their future success and integration into society."
+    ],
+    "usage_notes": "Use to discuss education, child development, or community issues in IELTS Speaking or Writing.",
+    "common_mistakes": "Don't confuse with 'socialism', which refers to a political or economic system."
+  },
+  {
+    "word": "deregulation",
+    "band_level": 7,
+    "topic": "economics",
+    "meaning": "the removal of government controls and regulations from an industry",
+    "examples": [
+      "The deregulation of the banking sector led to increased competition and lower interest rates.",
+      "Some argue that deregulation can lead to market instability and economic crises."
+    ],
+    "usage_notes": "Use when discussing the role of government in the economy.",
+    "common_mistakes": "Don't confuse with 'regulation', which means the opposite."
+  },
+  {
+    "word": "fiscal",
+    "band_level": 7,
+    "topic": "economics",
+    "meaning": "related to government revenue, especially taxes",
+    "examples": [
+      "The government's fiscal policy aims to reduce the budget deficit.",
+      "The company's fiscal year ends in December, and they will announce their profits then."
+    ],
+    "usage_notes": "Use when discussing government spending or taxation.",
+    "common_mistakes": "Don't confuse with 'physical', which refers to the body or material things."
+  },
+  {
+    "word": "monopoly",
+    "band_level": 7,
+    "topic": "economics",
+    "meaning": "a situation where one company has complete control over a market or industry",
+    "examples": [
+      "The company's monopoly on the market allowed them to set high prices.",
+      "The government sought to break up the monopoly and increase competition."
+    ],
+    "usage_notes": "Use when discussing market structures or competition.",
+    "common_mistakes": "Don't confuse with 'oligopoly', which refers to a market dominated by a few companies."
+  },
+  {
+    "word": "protectionism",
+    "band_level": 7,
+    "topic": "economics",
+    "meaning": "the policy of protecting a country's industries by restricting international trade",
+    "examples": [
+      "The country's protectionism policy has led to higher tariffs on imported goods.",
+      "Some argue that protectionism can lead to trade wars and economic stagnation."
+    ],
+    "usage_notes": "Use when discussing international trade or globalization.",
+    "common_mistakes": "Don't confuse with 'globalization', which refers to the increase in international trade and cultural exchange."
+  },
+  {
+    "word": "recession",
+    "band_level": 7,
+    "topic": "economics",
+    "meaning": "a period of economic decline, typically defined as a decline in GDP for two or more consecutive quarters",
+    "examples": [
+      "The country is experiencing a recession, with high unemployment and low economic growth.",
+      "The government has implemented policies to stimulate the economy and end the recession."
+    ],
+    "usage_notes": "Use when discussing economic trends or business cycles.",
+    "common_mistakes": "Don't confuse with 'depression', which refers to a more severe and prolonged economic downturn."
+  },
+  {
+    "word": "ethnocentric",
+    "band_level": 7,
+    "topic": "culture",
+    "meaning": "having a tendency to believe that one's own culture is superior to others",
+    "examples": [
+      "The company's ethnocentric approach to marketing failed to consider the needs of international customers.",
+      "Ethnocentric attitudes can lead to misunderstandings and conflicts between different cultural groups."
+    ],
+    "usage_notes": "Useful for discussing cultural differences and biases in IELTS Writing and Speaking.",
+    "common_mistakes": "Don't confuse with 'egocentric', which refers to self-centeredness."
+  },
+  {
+    "word": "cultural",
+    "band_level": 7,
+    "topic": "culture",
+    "meaning": "relating to the arts, customs, and traditions of a particular society",
+    "examples": [
+      "The city's cultural scene is vibrant, with numerous museums, galleries, and festivals throughout the year.",
+      "Understanding cultural differences is essential for effective communication in a globalized world."
+    ],
+    "usage_notes": "Can be used as an adjective to describe various aspects of culture, such as 'cultural heritage' or 'cultural diversity'.",
+    "common_mistakes": "Avoid using 'cultural' as a synonym for 'traditional' or 'historic'."
+  },
+  {
+    "word": "homogenization",
+    "band_level": 7,
+    "topic": "culture",
+    "meaning": "the process of becoming uniform or identical",
+    "examples": [
+      "The homogenization of global culture has led to the loss of unique local traditions.",
+      "Some critics argue that globalization has resulted in the homogenization of food, with the same chain restaurants appearing in every city."
+    ],
+    "usage_notes": "Useful for discussing the impact of globalization on local cultures.",
+    "common_mistakes": "Don't confuse with 'harmonization', which refers to the process of making things compatible or consistent."
+  },
+  {
+    "word": "assimilation",
+    "band_level": 7,
+    "topic": "culture",
+    "meaning": "the process of becoming part of a different culture or society",
+    "examples": [
+      "The government's policy of assimilation aimed to integrate immigrant communities into the dominant culture.",
+      "Assimilation can be a challenging and complex process for individuals who have to adapt to a new cultural environment."
+    ],
+    "usage_notes": "Useful for discussing the experiences of immigrants or minority groups.",
+    "common_mistakes": "Don't confuse with 'integration', which refers to the process of becoming a part of a larger whole while maintaining one's own identity."
+  },
+  {
+    "word": "itinerary",
+    "band_level": 7,
+    "topic": "travel",
+    "meaning": "a planned route or schedule for a journey",
+    "examples": [
+      "Before I left for my trip, I carefully planned out my itinerary to ensure I didn't miss any important landmarks.",
+      "The travel agency provided us with a detailed itinerary, including flight numbers and hotel reservations."
+    ],
+    "usage_notes": "Useful for describing travel plans or trips in IELTS Speaking or Writing.",
+    "common_mistakes": "Don't confuse with 'agenda', which refers to a list of items to be discussed."
+  },
+  {
+    "word": "destinations",
+    "band_level": 7,
+    "topic": "travel",
+    "meaning": "places that people travel to",
+    "examples": [
+      "Some popular destinations for honeymooners include Paris and Bali.",
+      "The travel brochure highlighted several exciting destinations that we had never considered before."
+    ],
+    "usage_notes": "Good for discussing favorite places or travel experiences.",
+    "common_mistakes": "Don't use 'destination' as a synonym for 'location'; 'destination' implies a place that people intentionally travel to."
+  },
+  {
+    "word": "commute",
+    "band_level": 7,
+    "topic": "travel",
+    "meaning": "to travel regularly to and from work or school",
+    "examples": [
+      "Many people commute to work by train or bus.",
+      "The traffic congestion made my daily commute to the office very frustrating."
+    ],
+    "usage_notes": "Useful for discussing daily travel routines or urban planning.",
+    "common_mistakes": "Don't confuse with 'travel', which can refer to any type of journey."
+  },
+  {
+    "word": "lodging",
+    "band_level": 7,
+    "topic": "travel",
+    "meaning": "a place to stay, especially a hotel or other temporary accommodation",
+    "examples": [
+      "We booked our lodging well in advance to ensure that we got the best rates.",
+      "The hotel provided comfortable lodging and excellent service during our stay."
+    ],
+    "usage_notes": "Good for describing accommodation options or travel experiences.",
+    "common_mistakes": "Don't use 'lodging' as a synonym for 'housing'; 'lodging' typically refers to temporary accommodation."
+  },
+  {
+    "word": "excursion",
+    "band_level": 7,
+    "topic": "travel",
+    "meaning": "a short trip or journey, especially one that is organized for pleasure",
+    "examples": [
+      "We went on an excursion to the nearby island, where we spent the day snorkeling and swimming.",
+      "The tour company offered a range of excursions, including hiking and sightseeing trips."
+    ],
+    "usage_notes": "Useful for describing short trips or travel experiences.",
+    "common_mistakes": "Don't confuse with 'expedition', which typically implies a longer, more challenging journey."
+  },
+  {
+    "word": "prodigious",
+    "band_level": 7,
+    "topic": "work",
+    "meaning": "very great or impressive in amount or degree",
+    "examples": [
+      "The company's prodigious growth has led to it becoming a market leader.",
+      "She has a prodigious work ethic, often working 12-hour days."
+    ],
+    "usage_notes": "Use to describe someone's impressive skills or achievements.",
+    "common_mistakes": "Don't confuse with 'prolific', which means producing a large amount of something."
+  },
+  {
+    "word": "meritocratic",
+    "band_level": 7,
+    "topic": "work",
+    "meaning": "a system in which people are given jobs or opportunities based on their ability and merit",
+    "examples": [
+      "The company claims to be meritocratic, but some employees disagree.",
+      "A meritocratic system is essential for a fair and productive workplace."
+    ],
+    "usage_notes": "Use to discuss issues related to fairness and equality in the workplace.",
+    "common_mistakes": "Don't confuse with 'bureaucratic', which refers to a system with many rules and regulations."
+  },
+  {
+    "word": "hierarchy",
+    "band_level": 7,
+    "topic": "work",
+    "meaning": "a system in which people or things are organized in a series of levels, with the most important at the top",
+    "examples": [
+      "The company has a strict hierarchy, with clear lines of authority.",
+      "Understanding the hierarchy of an organization is essential for effective communication."
+    ],
+    "usage_notes": "Use to describe the structure of a company or organization.",
+    "common_mistakes": "Don't confuse with 'network', which refers to a system of interconnected people or things."
+  },
+  {
+    "word": "redundant",
+    "band_level": 7,
+    "topic": "work",
+    "meaning": "not needed or useful because something else can do the same job",
+    "examples": [
+      "The company had to make some employees redundant due to financial difficulties.",
+      "The new technology has made many jobs redundant, leading to widespread unemployment."
+    ],
+    "usage_notes": "Use to discuss issues related to job losses or the impact of technology on employment.",
+    "common_mistakes": "Don't confuse with 'retrenched', which is not commonly used in British English."
+  },
+  {
+    "word": "delegate",
+    "band_level": 7,
+    "topic": "work",
+    "meaning": "to give someone the authority to do a task or make a decision",
+    "examples": [
+      "The manager delegated the task to her assistant, who completed it efficiently.",
+      "Learning to delegate effectively is an essential skill for any leader."
+    ],
+    "usage_notes": "Use to discuss issues related to management, leadership, or teamwork.",
+    "common_mistakes": "Don't confuse with 'deliberate', which means done on purpose or intentionally."
+  },
+  {
+    "word": "hypothesis",
+    "band_level": 7,
+    "topic": "science",
+    "meaning": "an idea or theory that is suggested as a possible explanation for something",
+    "examples": [
+      "The scientist formulated a hypothesis to explain the unusual phenomenon.",
+      "The hypothesis was tested through a series of experiments and observations."
+    ],
+    "usage_notes": "Useful for discussing scientific research and theories in IELTS Writing Task 2.",
+    "common_mistakes": "Don't confuse with 'theory', which is a more established explanation."
+  },
+  {
+    "word": "phenomenon",
+    "band_level": 7,
+    "topic": "science",
+    "meaning": "a remarkable or unusual event or situation that can be observed or experienced",
+    "examples": [
+      "The aurora borealis is a beautiful natural phenomenon.",
+      "The phenomenon of climate change is having a significant impact on global weather patterns."
+    ],
+    "usage_notes": "Can be used to describe a wide range of scientific topics, from astronomy to ecology.",
+    "common_mistakes": "Don't use it to describe something that is not observable or experiential."
+  },
+  {
+    "word": "parameter",
+    "band_level": 7,
+    "topic": "science",
+    "meaning": "a factor or variable that is used to define or limit a system or process",
+    "examples": [
+      "The parameters of the experiment were carefully controlled to ensure accurate results.",
+      "The parameters of the mathematical model were adjusted to fit the observed data."
+    ],
+    "usage_notes": "Can be used to describe a wide range of scientific contexts, from physics to biology.",
+    "common_mistakes": "Don't confuse with 'perimeter', which refers to the boundary of a shape or area."
+  },
+  {
+    "word": "interdependence",
+    "band_level": 7,
+    "topic": "globalization",
+    "meaning": "the state of relying on each other for support or existence",
+    "examples": [
+      "Globalization has led to increased interdependence among nations.",
+      "The interdependence of economies makes it difficult for countries to isolate themselves from global trends."
+    ],
+    "usage_notes": "Use when discussing the benefits and drawbacks of globalization.",
+    "common_mistakes": "Don't use 'independence' instead, as it implies the opposite."
+  },
+  {
+    "word": "cultural imperialism",
+    "band_level": 7,
+    "topic": "globalization",
+    "meaning": "the practice of imposing one's culture on another society",
+    "examples": [
+      "Some critics argue that globalization is a form of cultural imperialism.",
+      "The spread of Western media has been accused of promoting cultural imperialism in developing countries."
+    ],
+    "usage_notes": "Use when discussing the potential negative consequences of globalization on local cultures.",
+    "common_mistakes": "Don't confuse with 'cultural exchange', which implies a more mutual and respectful interaction."
+  },
+  {
+    "word": "multinational",
+    "band_level": 7,
+    "topic": "globalization",
+    "meaning": "a company or organization that operates in many countries",
+    "examples": [
+      "Multinational corporations have a significant impact on the global economy.",
+      "The multinational company has operations in over 100 countries worldwide."
+    ],
+    "usage_notes": "Use when discussing the role of large corporations in globalization.",
+    "common_mistakes": "Don't use 'international' instead, as it can imply a more limited scope."
+  },
+  {
+    "word": "densification",
+    "band_level": 7,
+    "topic": "urbanization",
+    "meaning": "the process of becoming more densely populated",
+    "examples": [
+      "The city's densification has led to increased competition for housing and resources.",
+      "Urban planners are working to manage the densification of the city center."
+    ],
+    "usage_notes": "Use when discussing the effects of urban growth and development.",
+    "common_mistakes": "Don't confuse with 'deforestation'."
+  },
+  {
+    "word": "infrastructure",
+    "band_level": 7,
+    "topic": "urbanization",
+    "meaning": "the basic systems and structures needed for a country or organization to function",
+    "examples": [
+      "Investing in infrastructure is crucial for supporting urbanization.",
+      "The city's infrastructure is struggling to keep up with the rapid population growth."
+    ],
+    "usage_notes": "Essential for discussing urban development and planning.",
+    "common_mistakes": "Don't use 'infrastructure' to refer to a single building or structure."
+  },
+  {
+    "word": "sprawl",
+    "band_level": 7,
+    "topic": "urbanization",
+    "meaning": "the spreading of urban areas into the surrounding countryside",
+    "examples": [
+      "Urban sprawl has led to the loss of natural habitats and farmland.",
+      "The city's sprawl has resulted in increased traffic congestion and air pollution."
+    ],
+    "usage_notes": "Use when discussing the negative effects of uncontrolled urban growth.",
+    "common_mistakes": "Don't confuse with 'suburbanization'."
+  },
+  {
+    "word": "revitalization",
+    "band_level": 7,
+    "topic": "urbanization",
+    "meaning": "the process of making something stronger or more active again",
+    "examples": [
+      "The city's revitalization efforts have focused on revitalizing the downtown area.",
+      "The revitalization of the waterfront has attracted new businesses and residents."
+    ],
+    "usage_notes": "Use when discussing urban renewal and regeneration projects.",
+    "common_mistakes": "Don't confuse with 'redevelopment'."
+  },
+  {
+    "word": "conurbation",
+    "band_level": 7,
+    "topic": "urbanization",
+    "meaning": "a large area of urban development that consists of several towns or cities",
+    "examples": [
+      "The conurbation of Tokyo and its surrounding cities is one of the largest in the world.",
+      "The conurbation of the east coast of the United States is a major economic hub."
+    ],
+    "usage_notes": "Use when discussing large urban areas and their economic or environmental impact.",
+    "common_mistakes": "Don't confuse with 'metropolis'."
+  },
+  {
+    "word": "innovation",
+    "band_level": 7,
+    "topic": "technology",
+    "meaning": "the act of introducing something new or different",
+    "examples": [
+      "The tech company's success can be attributed to its continuous innovation.",
+      "Solar panel innovation is key to reducing our carbon footprint."
+    ],
+    "usage_notes": "Discuss how technology has led to innovations, or the importance of innovation in a specific field.",
+    "common_mistakes": "Don't confuse with 'invention'. Innovation is about implementing new ideas, while invention refers to creating something new."
+  },
+  {
+    "word": "cybersecurity",
+    "band_level": 7,
+    "topic": "technology",
+    "meaning": "the practice of protecting internet-connected systems and networks from cyberattacks and unauthorized access",
+    "examples": [
+      "Cybersecurity is essential to protect sensitive business data.",
+      "Governments invest heavily in cybersecurity to safeguard national security."
+    ],
+    "usage_notes": "Discuss the importance of cybersecurity, recent cyberattacks and ways to prevent them.",
+    "common_mistakes": "Don't confuse 'cybersecurity' with 'data security', although they are related, data security is a subset of cybersecurity."
+  },
+  {
+    "word": "artificial intelligence",
+    "band_level": 7,
+    "topic": "technology",
+    "meaning": "a branch of computer science dealing with the development of computer systems able to perform tasks normally requiring human intelligence",
+    "examples": [
+      "Artificial intelligence has revolutionized fields such as healthcare and finance.",
+      "Some experts predict that AI will surpass human intelligence in the future."
+    ],
+    "usage_notes": "Discuss the impact of artificial intelligence on different industries, or ethical considerations related to AI.",
+    "common_mistakes": "Don't confuse 'artificial intelligence' with 'machine learning'. While machine learning is a subset of AI, it focuses on teaching computers to learn from data."
+  },
+  {
+    "word": "biodegradable",
+    "band_level": 7,
+    "topic": "environment",
+    "meaning": "capable of being decomposed by bacteria or other organisms and breaking down into natural substances",
+    "examples": [
+      "Using biodegradable bags for shopping is a good way to reduce plastic waste.",
+      "Compostable food waste can be disposed of in a biodegradable bin."
+    ],
+    "usage_notes": "Good for discussing waste management and eco-friendly practices.",
+    "common_mistakes": "Don't confuse with 'bioluminescent' or 'biodiversity'."
+  },
+  {
+    "word": "renewable",
+    "band_level": 7,
+    "topic": "environment",
+    "meaning": "capable of being replenished or replaced by natural processes or human-made methods",
+    "examples": [
+      "Wind power and solar energy are examples of renewable energy sources.",
+      "Using recycled paper is a good example of using renewable resources."
+    ],
+    "usage_notes": "Good for discussing alternative energy sources and resource management.",
+    "common_mistakes": "Don't confuse with 'renew' or 'refresh'."
+  },
+  {
+    "word": "preservation",
+    "band_level": 7,
+    "topic": "environment",
+    "meaning": "the act of keeping something unchanged",
+    "examples": [
+      "National parks are important for the preservation of natural habitats.",
+      "Museums focus on the preservation and display of historical artifacts."
+    ],
+    "usage_notes": "Good for discussing conservation efforts and cultural heritage.",
+    "common_mistakes": "Don't confuse with 'protection' or 'prevention'."
+  },
+  {
+    "word": "curriculum",
+    "band_level": 7,
+    "topic": "education",
+    "meaning": "the courses and subjects taught in a school or university",
+    "examples": [
+      "The new curriculum includes more technology and science.",
+      "Students must choose their preferred curriculum path."
+    ],
+    "usage_notes": "Good for discussing educational programs and structures.",
+    "common_mistakes": "Remember that it's plural when we talk about a collection of courses."
+  },
+  {
+    "word": "intellectually",
+    "band_level": 7,
+    "topic": "education",
+    "meaning": "related to the ability to acquire and apply knowledge and learning",
+    "examples": [
+      "The university is known for its intellectually stimulating environment.",
+      "Students are encouraged to think intellectually in their studies."
+    ],
+    "usage_notes": "Good for discussing the depth of knowledge and understanding.",
+    "common_mistakes": "Be aware of its different meanings when used with 'emotionally' or 'physically'."
+  },
+  {
+    "word": "scholarship",
+    "band_level": 7,
+    "topic": "education",
+    "meaning": "financial aid for students to pursue education",
+    "examples": [
+      "The university offers various scholarships based on academic merit.",
+      "Many organizations provide scholarships for underprivileged students."
+    ],
+    "usage_notes": "Good for discussing financial aid opportunities and eligibility criteria.",
+    "common_mistakes": "Understand the difference between a scholarship, grant and bursary."
+  },
+  {
+    "word": "syllabus",
+    "band_level": 7,
+    "topic": "education",
+    "meaning": "a list of topics or subjects to be taught in a course",
+    "examples": [
+      "The syllabus for the English language course includes reading and writing.",
+      "Students must familiarize themselves with the syllabus before each term."
+    ],
+    "usage_notes": "Good for discussing educational plans and requirements.",
+    "common_mistakes": "Remember that it's singular, and its pronunciation is similar to 'syllable'."
+  },
+  {
+    "word": "Homeostasis",
+    "band_level": 7,
+    "topic": "health",
+    "meaning": "The ability of an organism or cell to maintain internal stability despite external influences.",
+    "examples": [
+      "Maintaining homeostasis is essential for good health.",
+      "Disruptions to homeostasis can lead to various diseases."
+    ],
+    "usage_notes": "Good for discussing the body's response to changes and maintaining health.",
+    "common_mistakes": "Be careful with pronunciation, it's pronounced as /h\u0259\u028ami.o\u02c8st\u00e6sis/"
+  },
+  {
+    "word": "Comorbidity",
+    "band_level": 7,
+    "topic": "health",
+    "meaning": "The presence of one or more diseases or conditions co-occurring with another.",
+    "examples": [
+      "Anxiety and depression are common comorbidities among individuals with chronic illnesses.",
+      "Studies have shown that older adults often experience multiple comorbidities."
+    ],
+    "usage_notes": "Good for discussing health conditions and their related issues.",
+    "common_mistakes": "Mispronunciation: it's pronounced as /k\u0259\u02c8m\u0254\u02d0r.b\u026ad.i.ti/"
+  },
+  {
+    "word": "Holistic",
+    "band_level": 7,
+    "topic": "health",
+    "meaning": "Relating to or concerned with the whole person, not just their physical symptoms.",
+    "examples": [
+      "A holistic approach to healthcare considers the emotional and social needs of a patient.",
+      "Many alternative medicine practices emphasize a holistic approach to wellness."
+    ],
+    "usage_notes": "Good for discussing various approaches to health and well-being.",
+    "common_mistakes": "Be aware that holistic is an adjective and there's no verb form of it."
+  },
+  {
+    "word": "Epidemiology",
+    "band_level": 7,
+    "topic": "health",
+    "meaning": "The study of the distribution, causes, and effects of diseases and other health-related states in populations.",
+    "examples": [
+      "Epidemiologists study the spread of infectious diseases through population groups.",
+      "Public health initiatives often rely on epidemiological data to inform policy decisions."
+    ],
+    "usage_notes": "Good for discussing diseases and their prevalence, causes, and effects.",
+    "common_mistakes": "Be careful with the spelling: Epidemiology starts with 'epi-' meaning 'above', not 'epidemic'"
+  },
+  {
+    "word": "Vulnerability",
+    "band_level": 7,
+    "topic": "health",
+    "meaning": "The state of being exposed to the risk of harm or disease.",
+    "examples": [
+      "Individuals with certain health conditions are more vulnerable to infections.",
+      "Factors such as age and socioeconomic status can increase a person's vulnerability to chronic diseases."
+    ],
+    "usage_notes": "Good for discussing risk factors and susceptibility to various health issues.",
+    "common_mistakes": "Ensure the correct pronunciation: /\u02c8v\u028cl.n\u0259r.abil.i.ti/"
+  },
+  {
+    "word": "stratify",
+    "band_level": 7,
+    "topic": "society",
+    "meaning": "to arrange or classify people or things into distinct layers or groups",
+    "examples": [
+      "Society is often stratified based on income or social status.",
+      "The labor force can be stratified into skilled, semi-skilled, and unskilled workers."
+    ],
+    "usage_notes": "Good for discussing social structures and inequality.",
+    "common_mistakes": "Be careful with the spelling and pronunciation."
+  },
+  {
+    "word": "pluralism",
+    "band_level": 7,
+    "topic": "society",
+    "meaning": "the existence and acceptance of multiple beliefs, values, or ways of life within a society",
+    "examples": [
+      "Canada is known for its cultural pluralism.",
+      "European societies have traditionally been more pluralistic than those in Asia."
+    ],
+    "usage_notes": "Good for discussing diversity and tolerance.",
+    "common_mistakes": "Don't confuse with 'plurality'."
+  },
+  {
+    "word": "hegemonic",
+    "band_level": 7,
+    "topic": "society",
+    "meaning": "exercising power or influence over others in a dominant way, especially in terms of culture and ideas",
+    "examples": [
+      "The dominant culture of Hollywood has had a hegemonic effect on global cinema.",
+      "Religious fundamentalism can become a hegemonic force within a society."
+    ],
+    "usage_notes": "Good for discussing power structures and cultural dominance.",
+    "common_mistakes": "Be sure to use the correct form (adjective or noun)."
+  },
+  {
+    "word": "pathologize",
+    "band_level": 7,
+    "topic": "society",
+    "meaning": "to describe or represent a condition, behavior, or situation as being a disease or mental illness, often inappropriately",
+    "examples": [
+      "Political opposition is sometimes pathologized as 'mental illness' by authoritarian regimes.",
+      "The media can pathologize the normal responses of adolescence."
+    ],
+    "usage_notes": "Good for discussing stigma and societal perceptions.",
+    "common_mistakes": "Don't confuse with 'pathogenic'."
+  },
+  {
+    "word": "inflation",
+    "band_level": 7,
+    "topic": "economics",
+    "meaning": "an increase in the general price level of goods and services in an economy over a specified period.",
+    "examples": [
+      "High inflation can lead to decreased purchasing power for consumers.",
+      "Central banks use monetary policy tools to control inflation."
+    ],
+    "usage_notes": "Can be used when discussing economic indicators and trends.",
+    "common_mistakes": "Be careful not to confuse 'inflation' with 'deflation'."
+  },
+  {
+    "word": "austerity",
+    "band_level": 7,
+    "topic": "economics",
+    "meaning": "an economic policy of reducing public expenditure through reduced spending and increased tax revenues.",
+    "examples": [
+      "The government implemented austerity measures to reduce its budget deficit.",
+      "Critics argue that austerity policies worsen economic downturns."
+    ],
+    "usage_notes": "Helpful when discussing fiscal policy and its effects on economies.",
+    "common_mistakes": "Remember that 'austerity' refers specifically to cuts in government spending."
+  },
+  {
+    "word": "globalization",
+    "band_level": 7,
+    "topic": "economics",
+    "meaning": "the process of increasing interconnectedness and interdependence between countries through trade, investment, communication, and transportation.",
+    "examples": [
+      "Globalization has led to increased competition in markets and industries.",
+      "Critics argue that globalization disproportionately benefits developed nations."
+    ],
+    "usage_notes": "Useful for discussing economic trends and their impacts on the world.",
+    "common_mistakes": "Make sure you use 'globalization' correctly, as it refers to the increasing interconnectedness of the world."
+  },
+  {
+    "word": "multicultural",
+    "band_level": 7,
+    "topic": "culture",
+    "meaning": "relating to or representing various ethnic groups and their cultural traditions",
+    "examples": [
+      "London is a vibrant multicultural city.",
+      "The school has a strong commitment to promoting multiculturalism."
+    ],
+    "usage_notes": "Good for discussing the importance of diversity and acceptance.",
+    "common_mistakes": "Don't confuse with 'multi-dimensional' or 'multifaceted'."
+  },
+  {
+    "word": "vernacular",
+    "band_level": 7,
+    "topic": "language and culture",
+    "meaning": "the language that is native to a particular region or country",
+    "examples": [
+      "Children learn their mother tongue in the vernacular.",
+      "The study of ancient civilizations often includes an examination of their vernacular languages."
+    ],
+    "usage_notes": "Good for discussing language and culture in depth.",
+    "common_mistakes": "Don't confuse with 'vernacular art' or 'vernacular architecture'."
+  },
+  {
+    "word": "syncretism",
+    "band_level": 7,
+    "topic": "religion and culture",
+    "meaning": "the blending of different beliefs and practices",
+    "examples": [
+      "The religion in this region shows evidence of syncretism.",
+      "Syncretism is common when one culture encounters another."
+    ],
+    "usage_notes": "Good for discussing cultural interactions and their impacts on religious beliefs.",
+    "common_mistakes": "Don't confuse with 'synopsis' or 'syntax'."
+  },
+  {
+    "word": "patrimony",
+    "band_level": 7,
+    "topic": "history and culture",
+    "meaning": "property or wealth inherited from one's ancestors",
+    "examples": [
+      "The castle was an important part of the family's patrimony.",
+      "Many communities take pride in preserving their cultural patrimony."
+    ],
+    "usage_notes": "Good for discussing heritage and its significance.",
+    "common_mistakes": "Don't confuse with 'paternity' or 'matrimony'."
+  },
+  {
+    "word": "jamboree",
+    "band_level": 7,
+    "topic": "events and culture",
+    "meaning": "a large gathering or festival",
+    "examples": [
+      "The Boy Scouts held a jamboree every four years.",
+      "The city celebrated its anniversary with a grand jamboree."
+    ],
+    "usage_notes": "Good for discussing various cultural events and festivals.",
+    "common_mistakes": "Don't confuse with 'jam session' or 'jambon'"
+  },
+  {
+    "word": "wanderlust",
+    "band_level": 7,
+    "topic": "travel",
+    "meaning": "a strong desire to travel and explore new places",
+    "examples": [
+      "Many young people experience a powerful wanderlust that drives them to travel the world.",
+      "My friend's wanderlust led him to quit his job and travel through South America."
+    ],
+    "usage_notes": "Good for discussing motivation for traveling or personal experiences.",
+    "common_mistakes": "Be careful not to confuse it with 'wander' which means to walk aimlessly."
+  },
+  {
+    "word": "luggage",
+    "band_level": 7,
+    "topic": "travel",
+    "meaning": "the suitcases or bags that you take when you travel",
+    "examples": [
+      "Be sure to label your luggage clearly before checking it in at the airport.",
+      "We forgot to pack essential items in our luggage and had to buy them again."
+    ],
+    "usage_notes": "Good for discussing practical aspects of traveling such as packing and transportation.",
+    "common_mistakes": "Make sure to use 'luggage' instead of 'baggage' which has a similar but more formal meaning."
+  },
+  {
+    "word": "scenic",
+    "band_level": 7,
+    "topic": "travel",
+    "meaning": "providing a pleasing or attractive view or scene",
+    "examples": [
+      "The coastal road offered breathtakingly scenic views of the ocean.",
+      "We chose a scenic route through the mountains for our road trip."
+    ],
+    "usage_notes": "Good for discussing the beauty and attractions of different places.",
+    "common_mistakes": "Make sure to use 'scenic' instead of 'scene' which refers to a particular moment or event."
+  },
+  {
+    "word": "commodore",
+    "band_level": 7,
+    "topic": "travel",
+    "meaning": "a high-ranking naval officer",
+    "examples": [
+      "The commodore of the Royal Navy welcomed us to port.",
+      "During the colonial era, British commodores ruled over their overseas territories."
+    ],
+    "usage_notes": "Good for discussing maritime history or travel by boat.",
+    "common_mistakes": "Be aware that 'commodore' is a less common word and may not be familiar to everyone."
+  },
+  {
+    "word": "collaborative",
+    "band_level": 7,
+    "topic": "work",
+    "meaning": "working together to achieve a common goal",
+    "examples": [
+      "Success in modern business often requires collaborative efforts between departments.",
+      "Collaborative research projects allow scientists to pool their resources and expertise."
+    ],
+    "usage_notes": "Good for discussing teamwork or partnerships.",
+    "common_mistakes": "Don't confuse with 'cooperative'."
+  },
+  {
+    "word": "diversify",
+    "band_level": 7,
+    "topic": "work",
+    "meaning": "making something contain a greater variety of elements or types",
+    "examples": [
+      "To reduce risks and increase opportunities, businesses should diversify their product lines.",
+      "Governments are encouraging farmers to diversify their crops to cope with climate change."
+    ],
+    "usage_notes": "Good for discussing strategies to expand or adapt.",
+    "common_mistakes": "Don't confuse with 'diverge'."
+  },
+  {
+    "word": "efficiency",
+    "band_level": 7,
+    "topic": "work",
+    "meaning": "the ability to complete work with minimum wasted time or resources",
+    "examples": [
+      "To maintain profitability, businesses must continually improve their operational efficiency.",
+      "Reducing unnecessary paperwork is one way to increase office efficiency."
+    ],
+    "usage_notes": "Good for discussing improvements in productivity or performance.",
+    "common_mistakes": "Don't confuse with 'effectiveness'."
+  },
+  {
+    "word": "entrepreneurship",
+    "band_level": 7,
+    "topic": "work",
+    "meaning": "the ability to identify opportunities and create new businesses",
+    "examples": [
+      "Entrepreneurship is a popular career choice for those who are self-motivated and risk-tolerant.",
+      "Governments often offer incentives to attract entrepreneurship in underdeveloped regions."
+    ],
+    "usage_notes": "Good for discussing business creation or innovation.",
+    "common_mistakes": "Don't confuse with 'entrepreneur'."
+  },
+  {
+    "word": "empirical",
+    "band_level": 7,
+    "topic": "science",
+    "meaning": "relying on or based on observable facts rather than theoretical constructs",
+    "examples": [
+      "The scientist's approach was empirical, relying on experiments and data for evidence.",
+      "An empirical study of the effects of caffeine on productivity was conducted."
+    ],
+    "usage_notes": "Good for discussing scientific methods and research.",
+    "common_mistakes": "Be sure to use 'empirical' correctly, as it specifically refers to relying on observable facts rather than theoretical constructs."
+  },
+  {
+    "word": "corroborate",
+    "band_level": 7,
+    "topic": "science",
+    "meaning": "to provide evidence or support for a theory or idea",
+    "examples": [
+      "The new findings corroborated the existing theory about gravitational waves.",
+      "Additional research is needed to corroborate the initial results."
+    ],
+    "usage_notes": "Good for discussing scientific evidence and theories.",
+    "common_mistakes": "Be sure to use 'corroborate' correctly, as it specifically means 'to provide evidence or support for', rather than just 'confirming' or 'agreeing with'."
+  },
+  {
+    "word": "interconnected",
+    "band_level": 7,
+    "topic": "globalization",
+    "meaning": "relating to or involving a complex network of relationships between people or organizations, especially one that extends beyond national borders",
+    "examples": [
+      "The global economy has become increasingly interconnected in recent decades.",
+      "Interconnectedness is a key feature of globalization and the modern world."
+    ],
+    "usage_notes": "Can be used to describe the relationships between different countries and economies",
+    "common_mistakes": "Don't confuse with 'interconnect', which means to connect with others"
+  },
+  {
+    "word": "cultural homogenization",
+    "band_level": 7,
+    "topic": "globalization",
+    "meaning": "the process by which distinct cultures are merging into a single global culture",
+    "examples": [
+      "Cultural homogenization is a concern for many people who fear the loss of diversity and uniqueness.",
+      "The spread of Western cultural values through globalization has led to much debate about the impact on traditional societies."
+    ],
+    "usage_notes": "Can be used to discuss the potential negative effects of globalization on cultural diversity",
+    "common_mistakes": "Don't confuse with 'cultural heterogenization'"
+  },
+  {
+    "word": "neoliberalism",
+    "band_level": 7,
+    "topic": "globalization",
+    "meaning": "an economic and political ideology that advocates for free markets, deregulation, and privatization",
+    "examples": [
+      "Neoliberal economic policies have been criticized for widening income inequality.",
+      "The spread of neoliberalism around the world has led to a convergence of economic systems."
+    ],
+    "usage_notes": "Can be used to describe the dominant economic ideology that drives globalization",
+    "common_mistakes": "Don't confuse with 'liberalism'"
+  },
+  {
+    "word": "transnational",
+    "band_level": 7,
+    "topic": "globalization",
+    "meaning": "existing or operating beyond the borders of a single nation-state",
+    "examples": [
+      "Transnational corporations have significant influence over global economic trends.",
+      "Transnational organizations and networks are becoming increasingly important in addressing global challenges."
+    ],
+    "usage_notes": "Can be used to describe entities or phenomena that transcend national borders",
+    "common_mistakes": "Don't confuse with 'international'"
+  },
+  {
+    "word": "Metropolis",
+    "band_level": 7,
+    "topic": "urbanization",
+    "meaning": "A large city, especially as the chief town of a region.",
+    "examples": [
+      "Tokyo is the largest metropolis in the world by population.",
+      "The metropolis is known for its bright lights, tall buildings, and crowded streets."
+    ],
+    "usage_notes": "Useful for discussing the characteristics of cities, city life.",
+    "common_mistakes": "Make sure to remember the correct spelling."
+  },
+  {
+    "word": "Skyline",
+    "band_level": 7,
+    "topic": "urbanization",
+    "meaning": "The outline of the sky as seen from the ground, especially the line formed by the tallest buildings and other structures.",
+    "examples": [
+      "The city's famous skyline is easily recognizable from a distance.",
+      "The construction of new high-rise buildings has changed the city's skyline."
+    ],
+    "usage_notes": "Useful for discussing the appearance and character of cities.",
+    "common_mistakes": "Be careful with the spelling (it's not 'skylight')"
+  },
+  {
+    "word": "Metamorphosis",
+    "band_level": 7,
+    "topic": "urbanization",
+    "meaning": "A great or marked change in form, appearance, character, etc.",
+    "examples": [
+      "The city underwent a metamorphosis from a small town to a bustling metropolis.",
+      "Urbanization brings about a metamorphosis of the natural landscape."
+    ],
+    "usage_notes": "Useful for discussing significant changes in cities and urban areas.",
+    "common_mistakes": "Make sure to remember that it is one word"
+  }
+]
