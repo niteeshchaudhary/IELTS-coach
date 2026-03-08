@@ -15,20 +15,48 @@ export default function ListeningPracticeScreen() {
   const [submitting, setSubmitting] = useState(false);
   const [resultMode, setResultMode] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  
+  // Audio state
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [totalSeconds, setTotalSeconds] = useState(0);
+  
   const scrollViewRef = useRef<ScrollView>(null);
 
   useEffect(() => {
     loadContent();
   }, []);
 
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+    if (isPlaying) {
+      interval = setInterval(() => {
+        setElapsedSeconds(prev => {
+          if (prev >= totalSeconds && totalSeconds > 0) {
+            clearInterval(interval);
+            return totalSeconds;
+          }
+          return prev + 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isPlaying, totalSeconds]);
+
   const loadContent = async () => {
     setLoading(true);
     setResultMode(false);
     setAnswers({});
     setIsPlaying(false);
+    setElapsedSeconds(0);
     try {
       const data = await getPracticeModule('listening');
       setContent(data);
+      if (data && data.audio_text) {
+        // Estimate the duration roughly as 130 words per minute
+        const words = data.audio_text.split(' ').length;
+        const estSeconds = Math.max(Math.ceil((words / 130) * 60), 10);
+        setTotalSeconds(estSeconds);
+      }
     } catch (e) {
       console.error(e);
     } finally {
@@ -46,6 +74,9 @@ export default function ListeningPracticeScreen() {
       Speech.stop();
       setIsPlaying(false);
     } else {
+      if (elapsedSeconds >= totalSeconds) {
+         setElapsedSeconds(0); // Restart if finished
+      }
       setIsPlaying(true);
       if (content && content.audio_text) {
         // Read out the transcript
@@ -86,6 +117,14 @@ export default function ListeningPracticeScreen() {
     }
   };
 
+  const formatTime = (secs: number) => {
+    const mins = Math.floor(secs / 60);
+    const remaining = secs % 60;
+    return `${mins.toString().padStart(2, '0')}:${remaining.toString().padStart(2, '0')}`;
+  };
+
+  const progressPercent = totalSeconds > 0 ? (elapsedSeconds / totalSeconds) * 100 : 0;
+
   return (
     <View style={styles.container}>
       <Header title="🎧 Listening Practice" showBack onBack={() => {
@@ -105,9 +144,9 @@ export default function ListeningPracticeScreen() {
                 <IconSymbol name={isPlaying ? "pause.fill" : "play.fill"} size={32} color={Colors.light.tint} />
               </TouchableOpacity>
               <View style={styles.progressTrack}>
-                <View style={[styles.progressBar, { width: isPlaying ? '45%' : '0%' }]} />
+                <View style={[styles.progressBar, { width: `${progressPercent}%` }]} />
               </View>
-              <Text style={styles.timeText}>{isPlaying ? "01:12" : "00:00"} / 03:45</Text>
+              <Text style={styles.timeText}>{formatTime(elapsedSeconds)} / {formatTime(totalSeconds)}</Text>
             </View>
             {resultMode && (
               <View style={styles.transcriptBox}>
