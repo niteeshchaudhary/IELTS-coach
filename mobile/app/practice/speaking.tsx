@@ -22,38 +22,60 @@ export default function SpeakingPracticeScreen() {
   const [spokenText, setSpokenText] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<any>(null);
+  const [nativeVoiceAvailable, setNativeVoiceAvailable] = useState(true);
 
   useEffect(() => {
     loadContent();
     
-    // Setup Voice event listeners - wrapped in try catch for Expo Go compatibility
-    try {
-      Voice.onSpeechStart = () => setIsRecording(true);
-      Voice.onSpeechEnd = () => setIsRecording(false);
-      Voice.onSpeechError = (e: any) => {
-        console.warn("Speech recognition error:", e);
-        setIsRecording(false);
-      };
-      Voice.onSpeechResults = (e: any) => {
-        if (e.value && e.value.length > 0) {
-          setSpokenText(e.value[0]);
+    const setupVoice = async () => {
+      try {
+        // @ts-ignore
+        if (Voice && typeof Voice.isSpeechAvailable === 'function') {
+          // @ts-ignore
+          const available = await Voice.isSpeechAvailable();
+          setNativeVoiceAvailable(!!available);
+        } else {
+          // If the method doesn't exist, we assume it's available or we'll find out on start
         }
-      };
-      Voice.onSpeechPartialResults = (e: any) => {
-         if (e.value && e.value.length > 0) {
-           setSpokenText(e.value[0]);
-         }
-      };
-    } catch (e) {
-      console.warn("Failed to mount voice listeners (likely due to Expo Go missing native module):", e);
-    }
+        
+        Voice.onSpeechStart = () => setIsRecording(true);
+        Voice.onSpeechEnd = () => setIsRecording(false);
+        Voice.onSpeechError = (e: any) => {
+          console.warn("Speech recognition error:", e);
+          setIsRecording(false);
+        };
+        Voice.onSpeechResults = (e: any) => {
+          if (e.value && e.value.length > 0) {
+            setSpokenText(e.value[0]);
+          }
+        };
+        Voice.onSpeechPartialResults = (e: any) => {
+           if (e.value && e.value.length > 0) {
+             setSpokenText(e.value[0]);
+           }
+        };
+      } catch (e) {
+        console.warn("Failed to setup native voice module:", e);
+        setNativeVoiceAvailable(false);
+      }
+    };
+    
+    setupVoice();
 
     return () => {
-      try {
-        Voice.destroy().then(Voice.removeAllListeners);
-      } catch (e) {
-        // Ignore native destroy errors
-      }
+      const cleanUp = async () => {
+        try {
+          if (Voice && typeof Voice.destroy === 'function') {
+            await Voice.destroy();
+          }
+          if (Voice && typeof Voice.removeAllListeners === 'function') {
+            Voice.removeAllListeners();
+          }
+        } catch (error) {
+           // Silent catch for native voice errors
+        }
+      };
+      cleanUp();
     };
   }, []);
 
@@ -86,24 +108,33 @@ export default function SpeakingPracticeScreen() {
       if (isRecording) {
         // Stop recording
         try {
-          if (Voice && Voice.stop) await Voice.stop();
-        } catch(e) {}
+          if (Voice && typeof Voice.stop === 'function') {
+            await Voice.stop();
+          }
+        } catch(e) {
+           console.warn("Voice stop failed:", e);
+        }
         setIsRecording(false);
       } else {
         // Start recording
         setRecordingSeconds(0);
         setSpokenText("");
         setResult(null);
-        setIsRecording(true); // Always set UI state
+        setIsRecording(true);
+        
         try {
-          if (Voice && Voice.start) await Voice.start('en-US');
+          if (Voice && typeof Voice.start === 'function') {
+            await Voice.start('en-US');
+          } else {
+            setNativeVoiceAvailable(false);
+          }
         } catch(e) {
-          console.warn("Could not start native voice module (using fallback UI typing mode)");
+          console.warn("Could not start Voice module (native transcription might be missing in Expo Go):", e);
+          setNativeVoiceAvailable(false);
         }
       }
     } catch (e) {
-      console.error("Voice start/stop error:", e);
-      // Fallback UI toggle
+      console.error("Recording toggle logic error:", e);
       setIsRecording(!isRecording);
     }
   };
@@ -197,6 +228,12 @@ export default function SpeakingPracticeScreen() {
                 </Text>
               </View>
 
+              {!nativeVoiceAvailable && !result && (
+                <View style={styles.warningBox}>
+                  <Text style={styles.warningText}>⚠️ Auto-transcription is not available in the current environment. Please use your keyboard's microphone button to transcribe into the box below after stopping the timer.</Text>
+                </View>
+              )}
+
               {!isRecording && recordingSeconds > 0 && (
                 <View style={styles.transcriptionBox}>
                   <Text style={styles.instructionText}>Transcription:</Text>
@@ -255,5 +292,7 @@ const styles = StyleSheet.create({
   feedbackTitle: { fontSize: 18, fontWeight: 'bold', color: '#333', marginTop: 16, marginBottom: 12 },
   feedbackText: { fontSize: 16, color: '#444', lineHeight: 24, marginBottom: 16 },
   newTopicBtn: { backgroundColor: Colors.light.tint, padding: 16, borderRadius: 12, alignItems: 'center', marginTop: 32 },
-  newTopicText: { color: '#fff', fontSize: 18, fontWeight: 'bold' }
+  newTopicText: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
+  warningBox: { backgroundColor: '#fff3cd', padding: 12, borderRadius: 12, marginBottom: 16, borderWidth: 1, borderColor: '#ffeeba' },
+  warningText: { color: '#856404', fontSize: 13, lineHeight: 18, textAlign: 'center' }
 });
