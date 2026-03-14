@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { router } from 'expo-router';
 import { getDailyWords } from '@/services/api';
+import { useAuth } from '@/hooks/useAuth';
 
 interface Word {
   word: string;
@@ -9,14 +10,22 @@ interface Word {
 }
 
 export function StoriesBar() {
+  const { auth, isLoading: authLoading } = useAuth();
   const [words, setWords] = useState<Word[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Only attempt fetch if auth has loaded and is present
+    if (authLoading || !auth) {
+      return;
+    }
+
     const fetchWords = async () => {
       try {
         const data = await getDailyWords();
-        setWords(data);
+        if (data) {
+          setWords(data);
+        }
       } catch (error) {
         console.error("Failed to fetch words:", error);
       } finally {
@@ -24,9 +33,10 @@ export function StoriesBar() {
       }
     };
     fetchWords();
-  }, []);
+  }, [auth, authLoading]);
 
-  if (loading) {
+  // Handle immediate UI rendering without erroring
+  if (loading || authLoading || !auth) {
     return (
       <View style={[styles.container, { justifyContent: 'center', alignItems: 'center', height: 100 }]}>
         <ActivityIndicator size="small" color="#E1306C" />

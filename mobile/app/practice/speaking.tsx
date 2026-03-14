@@ -1,83 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
-// @ts-ignore
-import Voice from '@react-native-voice/voice';
-import { getPracticeModule, evaluatePractice } from '@/services/api';
+import { Audio } from 'expo-av';
+import { getPracticeModule, evaluateSpeakingAudio } from '@/services/api';
+import { useAuth } from '@/hooks/useAuth';
 import { Colors } from '@/constants/theme';
 import { Header } from '@/components/Header';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 
 export default function SpeakingPracticeScreen() {
   const router = useRouter();
+  const { auth } = useAuth();
   const [topics, setTopics] = useState<any>(null);
   const [selectedTopic, setSelectedTopic] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   
-  // Recording state
+  // Audio state
+  const [recording, setRecording] = useState<Audio.Recording | null>(null);
+  const [recordingUri, setRecordingUri] = useState<string | null>(null);
+
+  // Recording timer state
   const [isRecording, setIsRecording] = useState(false);
   const [recordingSeconds, setRecordingSeconds] = useState(0);
   
   // Submit state
-  const [spokenText, setSpokenText] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<any>(null);
-  const [nativeVoiceAvailable, setNativeVoiceAvailable] = useState(true);
 
   useEffect(() => {
     loadContent();
     
-    const setupVoice = async () => {
+    // Request permissions on mount
+    (async () => {
       try {
-        // @ts-ignore
-        if (Voice && typeof Voice.isSpeechAvailable === 'function') {
-          // @ts-ignore
-          const available = await Voice.isSpeechAvailable();
-          setNativeVoiceAvailable(!!available);
-        } else {
-          // If the method doesn't exist, we assume it's available or we'll find out on start
-        }
-        
-        Voice.onSpeechStart = () => setIsRecording(true);
-        Voice.onSpeechEnd = () => setIsRecording(false);
-        Voice.onSpeechError = (e: any) => {
-          console.warn("Speech recognition error:", e);
-          setIsRecording(false);
-        };
-        Voice.onSpeechResults = (e: any) => {
-          if (e.value && e.value.length > 0) {
-            setSpokenText(e.value[0]);
-          }
-        };
-        Voice.onSpeechPartialResults = (e: any) => {
-           if (e.value && e.value.length > 0) {
-             setSpokenText(e.value[0]);
-           }
-        };
-      } catch (e) {
-        console.warn("Failed to setup native voice module:", e);
-        setNativeVoiceAvailable(false);
+        await Audio.requestPermissionsAsync();
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: true,
+          playsInSilentModeIOS: true,
+        });
+      } catch (err) {
+        console.error('Failed to get recording permissions', err);
       }
-    };
-    
-    setupVoice();
+    })();
 
     return () => {
-      const cleanUp = async () => {
-        try {
-          if (Voice && typeof Voice.destroy === 'function') {
-            await Voice.destroy();
-          }
-          if (Voice && typeof Voice.removeAllListeners === 'function') {
-            Voice.removeAllListeners();
-          }
-        } catch (error) {
-           // Silent catch for native voice errors
-        }
-      };
-      cleanUp();
+      // Cleanup any active recordings on unmount
+      if (recording) {
+        recording.stopAndUnloadAsync().catch(console.error);
+      }
     };
-  }, []);
+  }, [recording]);
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
@@ -88,6 +60,8 @@ export default function SpeakingPracticeScreen() {
     }
     return () => clearInterval(interval);
   }, [isRecording]);
+
+
 
   const loadContent = async () => {
     setLoading(true);
@@ -107,35 +81,34 @@ export default function SpeakingPracticeScreen() {
     try {
       if (isRecording) {
         // Stop recording
-        try {
-          if (Voice && typeof Voice.stop === 'function') {
-            await Voice.stop();
-          }
-        } catch(e) {
-           console.warn("Voice stop failed:", e);
-        }
         setIsRecording(false);
+        if (recording) {
+          await recording.stopAndUnloadAsync();
+          const uri = recording.getURI();
+          console.log("Stopped recording. URI:", uri);
+          setRecordingUri(uri);
+        }
       } else {
         // Start recording
-        setRecordingSeconds(0);
-        setSpokenText("");
-        setResult(null);
-        setIsRecording(true);
-        
         try {
-          if (Voice && typeof Voice.start === 'function') {
-            await Voice.start('en-US');
-          } else {
-            setNativeVoiceAvailable(false);
-          }
-        } catch(e) {
-          console.warn("Could not start Voice module (native transcription might be missing in Expo Go):", e);
-          setNativeVoiceAvailable(false);
+          // Clean states before starting a fresh run
+          setRecordingSeconds(0);
+          setResult(null);
+          setRecordingUri(null);
+
+          const { recording: newRecording } = await Audio.Recording.createAsync(
+            Audio.RecordingOptionsPresets.HIGH_QUALITY
+          );
+          setRecording(newRecording);
+          setIsRecording(true);
+        } catch (err) {
+          console.error('Failed to start recording', err);
+          alert("Failed to access microphone.");
         }
       }
     } catch (e) {
       console.error("Recording toggle logic error:", e);
-      setIsRecording(!isRecording);
+      setIsRecording(false);
     }
   };
 
@@ -146,21 +119,39 @@ export default function SpeakingPracticeScreen() {
   };
 
   const handleSubmit = async () => {
-    if (!spokenText.trim()) {
-      alert("Please provide the transcribed text.");
+    const uriToUse = recordingUri;
+    if (!uriToUse) {
+      alert("Please record an audio response first.");
       return;
     }
     setSubmitting(true);
     try {
-      const res = await evaluatePractice('speaking', { 
-        text: spokenText,
-        duration_seconds: Math.max(recordingSeconds, 15), // Ensure at least 15s
-        topic: selectedTopic.topic
+      if (!auth) throw new Error("Not authenticated");
+
+      // Construct multipart form
+      const formData = new FormData();
+      formData.append('username', auth.username);
+      formData.append('session_id', auth.session_id);
+      formData.append('topic', selectedTopic?.topic || "Unknown Topic");
+      formData.append('duration_seconds', Math.max(recordingSeconds, 5).toString());
+
+      // Append audio
+      const filename = uriToUse.split('/').pop() || 'recording.m4a';
+
+      // @ts-ignore
+      formData.append('file', {
+        uri: uriToUse,
+        name: filename,
+        type: 'audio/m4a'
       });
+
+      const res = await evaluateSpeakingAudio(formData);
       setResult(res);
-    } catch (error) {
+      // Backend STT text is now available at res.transcribed_text
+    } catch (error: any) {
       console.error(error);
-      alert("Failed to evaluate speaking.");
+      const detail = error.response?.data?.detail || error.message;
+      alert(detail || "Failed to evaluate speaking.");
     } finally {
       setSubmitting(false);
     }
@@ -168,11 +159,13 @@ export default function SpeakingPracticeScreen() {
 
   const resetPractice = () => {
     setResult(null);
-    setSpokenText("");
     setRecordingSeconds(0);
+    setRecordingUri(null);
     // Pick another topic
-    const randomTopic = topics.part2[Math.floor(Math.random() * topics.part2.length)];
-    setSelectedTopic(randomTopic);
+    if (topics && topics.part2) {
+      const randomTopic = topics.part2[Math.floor(Math.random() * topics.part2.length)];
+      setSelectedTopic(randomTopic);
+    }
   };
 
   return (
@@ -199,6 +192,9 @@ export default function SpeakingPracticeScreen() {
                 <Text style={styles.bandValue}>{result.overall_band.toFixed(1)}</Text>
               </View>
               
+              <Text style={styles.feedbackTitle}>Your Speech Captured:</Text>
+              <Text style={styles.feedbackText}>{result.transcribed_text}</Text>
+
               <Text style={styles.feedbackTitle}>Feedback:</Text>
               <Text style={styles.feedbackText}>{result.feedback}</Text>
               
@@ -228,30 +224,16 @@ export default function SpeakingPracticeScreen() {
                 </Text>
               </View>
 
-              {!nativeVoiceAvailable && !result && (
-                <View style={styles.warningBox}>
-                  <Text style={styles.warningText}>⚠️ Auto-transcription is not available in the current environment. Please use your keyboard's microphone button to transcribe into the box below after stopping the timer.</Text>
-                </View>
-              )}
-
-              {!isRecording && recordingSeconds > 0 && (
+              {!isRecording && recordingUri && (
                 <View style={styles.transcriptionBox}>
-                  <Text style={styles.instructionText}>Transcription:</Text>
-                  <TextInput
-                    style={styles.input}
-                    multiline
-                    value={spokenText}
-                    onChangeText={setSpokenText}
-                    placeholder="Your speech will be transcribed here. You can also edit it before submitting..."
-                    placeholderTextColor="#999"
-                  />
+                  <Text style={styles.instructionText}>Audio ready for evaluation.</Text>
                   
                   <TouchableOpacity 
                     style={[styles.submitBtn, submitting && styles.disabledBtn]} 
                     onPress={handleSubmit}
                     disabled={submitting}
                   >
-                    {submitting ? <ActivityIndicator color="#fff" /> : <Text style={styles.submitText}>Evaluate Speech</Text>}
+                    {submitting ? <ActivityIndicator color="#fff" /> : <Text style={styles.submitText}>Upload & Evaluate</Text>}
                   </TouchableOpacity>
                 </View>
               )}
@@ -281,7 +263,6 @@ const styles = StyleSheet.create({
   recordingActiveBtn: { backgroundColor: '#ff3b30', shadowColor: '#ff3b30', shadowOffset: {width: 0, height: 4}, shadowOpacity: 0.3, shadowRadius: 8, elevation: 8 },
   recordSubtext: { fontSize: 14, color: '#888' },
   transcriptionBox: { padding: 8 },
-  input: { backgroundColor: '#fff', borderRadius: 12, padding: 16, fontSize: 16, minHeight: 150, textAlignVertical: 'top', borderWidth: 1, borderColor: '#ddd', marginBottom: 16 },
   submitBtn: { backgroundColor: '#4cd964', padding: 16, borderRadius: 12, alignItems: 'center' },
   disabledBtn: { opacity: 0.7 },
   submitText: { color: '#fff', fontSize: 18, fontWeight: 'bold' },

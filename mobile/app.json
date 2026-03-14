@@ -39,7 +39,8 @@
           }
         }
       ],
-      "@react-native-voice/voice"
+      "@react-native-voice/voice",
+      "expo-audio"
     ],
     "experiments": {
       "typedRoutes": true,

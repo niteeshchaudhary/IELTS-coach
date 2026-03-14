@@ -1,10 +1,12 @@
-from fastapi import FastAPI, HTTPException, Depends, Header, Query
+from fastapi import FastAPI, HTTPException, Depends, Header, Query, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import time
 import uuid
 import sqlite3
 import hashlib
+import os
+import tempfile
 
 # Load .env variables so config.py uses GROQ
 from dotenv import load_dotenv
@@ -235,8 +237,7 @@ def get_current_history(username: str = Query(...), session_id: str = Query(...)
 
 @app.get("/api/profile")
 def get_profile(username: str = Query(...)):
-    """Real profile data from DB"""
-    # Just need db path, grab arbitrary session id for now to load DB
+    """Real profile data from DB including historical progress"""
     vocab_system, memory = get_user_systems(username, "profile_view")
     
     import sqlite3
@@ -245,29 +246,51 @@ def get_profile(username: str = Query(...)):
     avg_band = 0.0
     tests = 0
     words_mastered = 0
+    history = []
+    total_games = 0
+    total_speaking_mins = 0
+    
     try:
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
         
-        c.execute("SELECT AVG(estimated_band_score), COUNT(*) FROM daily_progress WHERE estimated_band_score IS NOT NULL")
+        # 1. Overall Stats
+        c.execute("SELECT AVG(estimated_band_score), COUNT(*), SUM(games_played), SUM(total_speaking_time_sec) FROM daily_progress WHERE estimated_band_score IS NOT NULL")
         row = c.fetchone()
-        if row and row[0]:
-            avg_band = round(row[0], 1)
-            tests = row[1]
+        if row:
+            avg_band = round(row[0], 1) if row[0] else 0.0
+            tests = row[1] if row[1] else 0
+            total_games = row[2] if row[2] else 0
+            total_speaking_mins = round((row[3] / 60.0), 1) if row[3] else 0.0
             
+        # 2. Vocabulary Mastered
         c.execute("SELECT COUNT(*) FROM vocabulary_progress WHERE is_mastered = 1")
         row2 = c.fetchone()
         if row2:
             words_mastered = row2[0]
             
+        # 3. Last 7 Days History
+        c.execute("SELECT date, estimated_band_score, total_turns FROM daily_progress ORDER BY date DESC LIMIT 7")
+        rows = c.fetchall()
+        for r in reversed(rows):
+            history.append({
+                "date": r[0],
+                "band": r[1] if r[1] else 0.0,
+                "turns": r[2] if r[2] else 0
+            })
+            
         conn.close()
-    except Exception:
+    except Exception as e:
+        print(f"Error fetching profile stats: {e}")
         pass
         
     return {
         "tests": tests,
         "avgBand": avg_band,
-        "wordsMastered": words_mastered
+        "wordsMastered": words_mastered,
+        "totalGames": total_games,
+        "totalSpeakingMins": total_speaking_mins,
+        "history": history
     }
 
 @app.get("/api/games/{game_id}/new")
@@ -368,15 +391,46 @@ def get_practice_module(module: str):
 @app.post("/api/practice/evaluate/{module}")
 def evaluate_practice(module: str, payload: dict, username: str = Query(...), session_id: str = Query(...)):
     """Evaluate answers for a practice module."""
-    _, memory = get_user_systems(username, session_id)
+    vocab_system, memory = get_user_systems(username, session_id)
     
     if module in ["reading", "listening"]:
-        answers = payload.get("answers", {})
-        # Note: the full logic to check reading/listening is simple matching
-        # However, we can just return the raw score calculations directly on the frontend
-        # For simplicity, returning a success signal here, assuming frontend does the simple validation
-        # as seen in the Streamlit code.
-        return {"status": "success", "message": "Evaluation delegated to frontend for multiple choice."}
+        user_answers = payload.get("answers", {})
+        # Get actual content to compare answers
+        if module == "reading":
+            content = IELTSGuidance.get_reading_practice_content()
+        else:
+            content = IELTSGuidance.get_listening_practice_content()
+            
+        questions = content.get("questions", [])
+        correct_count = 0
+        total_questions = len(questions)
+        
+        for q in questions:
+            q_id = q["id"]
+            correct_ans = q["answer"]
+            if user_answers.get(q_id) == correct_ans:
+                correct_count += 1
+        
+        # Simple band score mapping: 4/4=9, 3/4=7.5, 2/4=6, 1/4=4.5, 0=0
+        if total_questions > 0:
+            percentage = correct_count / total_questions
+            if percentage >= 1.0: band = 9.0
+            elif percentage >= 0.75: band = 7.5
+            elif percentage >= 0.5: band = 6.0
+            elif percentage >= 0.25: band = 4.5
+            else: band = 0.0
+        else:
+            band = 0.0
+            
+        # Record progress
+        memory.update_daily_progress(band_score=band, add_turn=False)
+        
+        return {
+            "status": "success", 
+            "correct_count": correct_count, 
+            "total": total_questions,
+            "estimated_band": band
+        }
         
     elif module == "speaking":
         text = payload.get("text", "")
@@ -404,15 +458,76 @@ def evaluate_practice(module: str, payload: dict, username: str = Query(...), se
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Scoring error: {str(e)}")
             
-    raise HTTPException(status_code=404, detail="Module not supported for evaluation")
-    """Return mock practice questions"""
-    return {
-        "modules": [
-            {"id": "p1", "part": 1, "topic": "Hometown", "status": "Todo"},
-            {"id": "p2", "part": 2, "topic": "Describe a Book", "status": "Completed"},
-            {"id": "p3", "part": 3, "topic": "Technology & Society", "status": "In Progress"}
-        ]
-    }
+@app.post("/api/practice/evaluate_audio/speaking")
+async def evaluate_speaking_audio(
+    file: UploadFile = File(...),
+    username: str = Form(...),
+    session_id: str = Form(...),
+    topic: str = Form(...),
+    duration_seconds: float = Form(...)
+):
+    """Evaluate speaking practice from an uploaded audio file using Whisper STT."""
+    try:
+        from faster_whisper import WhisperModel
+        import config
+    except ImportError:
+        raise HTTPException(status_code=500, detail="STT dependencies not available on server")
+
+    _, memory = get_user_systems(username, session_id)
+    
+    # Save the uploaded file temporarily
+    fd, temp_path = tempfile.mkstemp(suffix=".m4a")
+    try:
+        with os.fdopen(fd, 'wb') as temp_file:
+            content = await file.read()
+            temp_file.write(content)
+            
+        # Transcribe audio
+        model = WhisperModel(config.WHISPER_MODEL_SIZE, device=config.WHISPER_DEVICE, compute_type=config.WHISPER_COMPUTE_TYPE)
+        segments, info = model.transcribe(temp_path, beam_size=config.WHISPER_BEAM_SIZE, language=config.WHISPER_LANGUAGE)
+        
+        transcribed_text = " ".join([segment.text for segment in segments]).strip()
+        
+        if not transcribed_text:
+            raise HTTPException(status_code=400, detail="Could not detect any speech in the audio.")
+            
+        # Perform Evaluation logic matching the text-based endpoint
+        scorer = IELTSScorer()
+        scorer.set_llm(get_llm())
+        
+        if duration_seconds <= 0:
+            word_count = len(transcribed_text.split())
+            duration_seconds = (word_count / 130.0) * 60.0
+            
+        result = scorer.evaluate(transcribed_text, duration_seconds, topic)
+        
+        if result and result.get("overall_band", 0) > 0:
+            memory.update_daily_progress(speaking_time_sec=duration_seconds, band_score=result["overall_band"], add_turn=False)
+            
+            # Augment result with transcribed text to display on frontend
+            result["transcribed_text"] = transcribed_text
+            return result
+        else:
+            raise HTTPException(status_code=400, detail="Evaluation failed to produce a valid score")
+            
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Audio evaluation error: {str(e)}")
+    finally:
+        # Cleanup temp file
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
+
+@app.get("/api/practice/{module}")
+def get_practice_module(module: str):
+    """Gets the content for a specific practice module."""
+    if module == "speaking":
+        return IELTSGuidance.get_speaking_topics()
+    elif module == "reading":
+        return IELTSGuidance.get_reading_practice_content()
+    elif module == "listening":
+        return IELTSGuidance.get_listening_practice_content()
+    else:
+        raise HTTPException(status_code=404, detail="Module not found")
 
 if __name__ == "__main__":
     import uvicorn

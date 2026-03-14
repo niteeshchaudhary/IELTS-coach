@@ -3,7 +3,11 @@ import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Use localhost for iOS simulator, 10.0.2.2 for Android emulator, or your computer's local IP for physical devices
-const BASE_URL = Platform.OS === 'android' ? 'http://192.168.29.47:8008/api' : 'http://192.168.29.47:8008/api';
+const LOCAL_IP = '192.168.29.47'; 
+export const BASE_URL = Platform.OS === 'android' 
+  ? `http://${LOCAL_IP}:8008/api` 
+  : `http://${LOCAL_IP}:8008/api`;
+// Note: If using Android Emulator and local IP fails, change LOCAL_IP to '10.0.2.2'
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -111,6 +115,25 @@ export const getPracticeModule = async (moduleId: string) => {
 export const evaluatePractice = async (moduleId: string, payload: any) => {
     const response = await api.post(`/practice/evaluate/${moduleId}`, payload);
     return response.data;
+}
+
+export const evaluateSpeakingAudio = async (formData: FormData) => {
+    // Use React Native's native fetch to avoid Axios FormData boundary network errors on Android
+    const response = await fetch(`${BASE_URL}/practice/evaluate_audio/speaking`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json',
+            // DO NOT set Content-Type so React Native generates the correct multiple/part boundary
+        },
+    });
+    
+    if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(`Evaluation failed: ${response.status} ${errText}`);
+    }
+    
+    return await response.json();
 }
 
 export default api;
